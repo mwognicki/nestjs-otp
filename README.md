@@ -1,7 +1,3 @@
-@ognicki/nestjs-otp / [Exports](modules.md)
-
-`@ognicki/nestjs-otp` / [Exports](modules.md)
-
 # NestJS OTP Authentication Module
 
 `@ognicki/nestjs-otp` is a NestJS module designed to facilitate OTP (One-Time Password)
