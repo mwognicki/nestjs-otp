@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L9)
+[lib/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L9)
 
 ## Properties
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:10](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L10)
+[lib/otp.service.ts:10](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L10)
 
 ## Accessors
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:13](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L13)
+[lib/otp.service.ts:13](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L13)
 
 ## Methods
 
@@ -80,13 +80,13 @@
 
 #### Defined in
 
-[lib/otp.service.ts:90](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L90)
+[lib/otp.service.ts:90](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L90)
 
 ___
 
 ### pair
 
-▸ **pair**(`opts`): `Promise<string>`
+▸ **pair**(`opts`): `Promise`\<`string`\>
 
 Return a link for pairing with authenticator application.
 
@@ -98,19 +98,19 @@ Return a link for pairing with authenticator application.
 
 #### Returns
 
-`Promise<string>`
+`Promise`\<`string`\>
 
 Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/otp.service.ts:22](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L22)
+[lib/otp.service.ts:22](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L22)
 
 ___
 
 ### qrDataURL
 
-▸ **qrDataURL**(`link`): `Promise<string>`
+▸ **qrDataURL**(`link`): `Promise`\<`string`\>
 
 Generate a QR code as a data URL.
 
@@ -122,19 +122,19 @@ Generate a QR code as a data URL.
 
 #### Returns
 
-`Promise<string>`
+`Promise`\<`string`\>
 
 A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:62](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L62)
+[lib/otp.service.ts:62](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L62)
 
 ___
 
 ### qrString
 
-▸ **qrString**(`link`): `Promise<string>`
+▸ **qrString**(`link`): `Promise`\<`string`\>
 
 Generate a QR code as a string.
 
@@ -146,19 +146,19 @@ Generate a QR code as a string.
 
 #### Returns
 
-`Promise<string>`
+`Promise`\<`string`\>
 
 A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:79](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L79)
+[lib/otp.service.ts:79](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L79)
 
 ___
 
 ### verify
 
-▸ **verify**(`token`, `secret`, `shouldThrow?`): `Promise<boolean>`
+▸ **verify**(`token`, `secret`, `shouldThrow?`): `Promise`\<`boolean`\>
 
 Verify an OTP token against a secret.
 
@@ -172,7 +172,7 @@ Verify an OTP token against a secret.
 
 #### Returns
 
-`Promise<boolean>`
+`Promise`\<`boolean`\>
 
 Whether the token is valid.
 
@@ -182,4 +182,4 @@ If the token is invalid and `shouldThrow` is true.
 
 #### Defined in
 
-[lib/otp.service.ts:38](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/otp.service.ts#L38)
+[lib/otp.service.ts:38](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.service.ts#L38)

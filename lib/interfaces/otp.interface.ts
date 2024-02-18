@@ -48,7 +48,7 @@ export interface IOtpModuleOptions {
   /**
    * A function that returns the secret to use for generating the OTP.
    */
-  secretResolver?: () => Promise<string>;
+  secretResolver?: (request?: Request) => Promise<string>;
 
   /**
    * A function that returns the OTP from the request.

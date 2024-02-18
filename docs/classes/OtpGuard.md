@@ -43,7 +43,7 @@ A guard that verifies an one-time password (OTP) sent with a request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:15](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/guards/otp.guard.ts#L15)
+[lib/guards/otp.guard.ts:15](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/guards/otp.guard.ts#L15)
 
 ## Properties
 
@@ -53,13 +53,13 @@ A guard that verifies an one-time password (OTP) sent with a request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:15](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/guards/otp.guard.ts#L15)
+[lib/guards/otp.guard.ts:15](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/guards/otp.guard.ts#L15)
 
 ## Methods
 
 ### canActivate
 
-▸ **canActivate**(`context`): `Promise<boolean>`
+▸ **canActivate**(`context`): `Promise`\<`boolean`\>
 
 Verifies the OTP and returns a boolean indicating whether it is valid.
 
@@ -71,7 +71,7 @@ Verifies the OTP and returns a boolean indicating whether it is valid.
 
 #### Returns
 
-`Promise<boolean>`
+`Promise`\<`boolean`\>
 
 #### Implementation of
 
@@ -79,13 +79,13 @@ CanActivate.canActivate
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:21](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/guards/otp.guard.ts#L21)
+[lib/guards/otp.guard.ts:21](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/guards/otp.guard.ts#L21)
 
 ___
 
 ### getOTP
 
-▸ **getOTP**(`request`): `Promise<string>`
+▸ **getOTP**(`request`): `Promise`\<`string`\>
 
 Gets the OTP from the request.
 
@@ -97,13 +97,13 @@ Gets the OTP from the request.
 
 #### Returns
 
-`Promise<string>`
+`Promise`\<`string`\>
 
 The OTP.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:57](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/guards/otp.guard.ts#L57)
+[lib/guards/otp.guard.ts:57](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/guards/otp.guard.ts#L57)
 
 ___
 
@@ -127,22 +127,22 @@ The request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:45](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/guards/otp.guard.ts#L45)
+[lib/guards/otp.guard.ts:45](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/guards/otp.guard.ts#L45)
 
 ___
 
 ### getSecret
 
-▸ **getSecret**(): `Promise<string>`
+▸ **getSecret**(): `Promise`\<`string`\>
 
 Gets the secret used for OTP verification.
 
 #### Returns
 
-`Promise<string>`
+`Promise`\<`string`\>
 
 The secret.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:33](https://github.com/mwognicki/nestjs-otp/blob/0fb1298/lib/guards/otp.guard.ts#L33)
+[lib/guards/otp.guard.ts:33](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/guards/otp.guard.ts#L33)
