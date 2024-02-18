@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L9)
+[lib/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L9)
 
 ## Properties
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:10](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L10)
+[lib/otp.service.ts:10](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L10)
 
 ## Accessors
 
@@ -66,7 +66,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:13](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L13)
+[lib/otp.service.ts:13](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L13)
 
 ## Methods
 
@@ -80,7 +80,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:90](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L90)
+[lib/otp.service.ts:90](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L90)
 
 ___
 
@@ -104,7 +104,7 @@ Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/otp.service.ts:22](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L22)
+[lib/otp.service.ts:22](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L22)
 
 ___
 
@@ -128,7 +128,7 @@ A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:62](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L62)
+[lib/otp.service.ts:62](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L62)
 
 ___
 
@@ -152,7 +152,7 @@ A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:79](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L79)
+[lib/otp.service.ts:79](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L79)
 
 ___
 
@@ -182,4 +182,4 @@ If the token is invalid and `shouldThrow` is true.
 
 #### Defined in
 
-[lib/otp.service.ts:38](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.service.ts#L38)
+[lib/otp.service.ts:38](https://github.com/mwognicki/nestjs-otp/blob/1d22df0/lib/otp.service.ts#L38)
