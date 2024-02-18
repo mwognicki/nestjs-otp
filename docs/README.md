@@ -6,8 +6,8 @@
 
 `@ognicki/nestjs-otp` is a NestJS module designed to facilitate OTP (One-Time Password)
 authentication within your NestJS applications without relying on external APIs.
-Module includes dynamic module registration, an OtpService for managing OTP
-pairing and verification, and an OtpGuard to ensure the validity of provided OTP tokens.
+Module includes dynamic module registration, an `OtpService` for managing OTP
+pairing and verification, and an `OtpGuard` to ensure the validity of provided OTP tokens.
 
 ## What is OTP Authentication?
 
@@ -24,13 +24,11 @@ period of time or upon single use.
 
 ### Authenticator Applications
 
-Authenticator applications are a popular form of OTP authentication. These applications generate time-based OTPs (TOTPs) or HMAC-based OTPs (HOTPs) that can be used to authenticate users across various services and platforms.
+Authenticator applications are a popular form of OTP authentication. These applications
+generate time-based OTPs (TOTPs) or HMAC-based OTPs (HOTPs) that can be used to 
+authenticate users across various services and platforms.
 
 </details>
-
-## Reference
-
-See `./docs` for more information.
 
 ## Module Dependencies
 
@@ -40,13 +38,21 @@ The `@ognicki/nestjs-otp` module leverages the following dependencies:
 
 > See https://www.npmjs.com/package/otpauth for more information.
 
-The otpauth package is utilized for generating and validating OTPs (One-Time Passwords) according to the TOTP (Time-Based One-Time Password) and HOTP (HMAC-Based One-Time Password) algorithms. This package provides robust functionality for handling OTP generation, ensuring secure and reliable authentication processes.
+The `otpauth` package is utilized for generating and validating OTPs (One-Time Passwords) 
+according to the TOTP (Time-Based One-Time Password) and HOTP (HMAC-Based One-Time 
+Password) algorithms. This package provides robust functionality for handling OTP 
+generation, ensuring secure and reliable authentication processes.
 
-### qrcode Package
+### `qrcode` Package
 
 > See https://www.npmjs.com/package/qrcode for more information.
 
-The qrcode package is employed for generating QR codes that can be scanned by authenticator applications during the initial setup process. QR codes provide a convenient way for users to import shared secret keys into their authenticator applications, streamlining the setup of OTP authentication. By integrating qrcode, the `@ognicki/nestjs-otp` module facilitates a seamless user experience when configuring OTP authentication.
+The `qrcode` package is employed for generating QR codes that can be scanned by 
+authenticator applications during the initial setup process. QR codes provide a 
+convenient way for users to import shared secret keys into their authenticator 
+applications, streamlining the setup of OTP authentication. By integrating qrcode, 
+the `@ognicki/nestjs-otp` module facilitates a seamless user experience when 
+configuring OTP authentication.
 
 ## Installation
 
@@ -86,11 +92,14 @@ The lifecycle of the `OtpGuard` involves the following steps:
 
 ### Default `OtpGuard` Behavior
 
-By default, the OtpGuard utilizes the HTTP execution context to retrieve the request and extracts the OTP token from the X-One-Time-Password header. This behavior is suitable for standard HTTP-based authentication scenarios.
+By default, the `OtpGuard` utilizes the HTTP execution context to retrieve the 
+request and extracts the OTP token from the `X-One-Time-Password` header. This 
+behavior is suitable for standard HTTP-based authentication scenarios.
 
 ## Initial Setup
 
-Import the OtpModule into your root AppModule or any other module where you want to use OTP authentication:
+Import the `OtpModule` into your root `AppModule` or any other module where you 
+want to use OTP authentication:
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -124,11 +133,16 @@ export class SecureController {
 
 ## Customizing the Resolvers Logic
 
-The `@ognicki/nestjs-otp` module offers the flexibility to customize resolver functions, empowering developers to tailor OTP authentication according to their specific requirements. These resolver functions are utilized by the OtpGuard to handle various aspects of authentication, including obtaining the request context and extracting the OTP token.
+The `@ognicki/nestjs-otp` module offers the flexibility to customize resolver 
+functions, empowering developers to tailor OTP authentication according to their 
+specific requirements. These resolver functions are utilized by the `OtpGuard` 
+to handle various aspects of authentication, including obtaining the request
+context and extracting the OTP token.
 
 ### Customization
 
-You can customize the following resolver functions to adapt OTP authentication to different use cases:
+You can customize the following resolver functions to adapt OTP authentication
+to different use cases:
 
 - **Context Resolver:** Retrieves the execution context, enabling access to the request object.
 - **Request Resolver:** Obtains the request object from the execution context, facilitating extraction of relevant data.
@@ -184,9 +198,9 @@ In the example above:
 
 In the example above:
 
-This resolver function determines how the secret key for OTP generation is obtained.
-It uses the UserService to fetch the OTP secret associated with the current user.
-The UserService is expected to provide an asynchronous method (getOtpSecret) that retrieves the OTP secret based on the user's context.
+- This resolver function determines how the secret key for OTP generation is obtained.
+- It uses the `UserService` to fetch the OTP secret associated with the current user.
+- The `UserService` is expected to provide an asynchronous method (`getOtpSecret`) that retrieves the OTP secret based on the user's context.
 
 An `otp.config.ts` file might look like following:
 
