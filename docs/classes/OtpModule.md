@@ -43,7 +43,7 @@ Registers the OTP module.
 
 #### Defined in
 
-[lib/otp.module.ts:12](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.module.ts#L12)
+[lib/otp.module.ts:12](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.module.ts#L12)
 
 ___
 
@@ -65,4 +65,4 @@ Registers the OTP module asynchronously.
 
 #### Defined in
 
-[lib/otp.module.ts:30](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/otp.module.ts#L30)
+[lib/otp.module.ts:30](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/otp.module.ts#L30)

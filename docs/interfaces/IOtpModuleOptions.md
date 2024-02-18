@@ -29,7 +29,7 @@ The algorithm to use for generating the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:31](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L31)
+[lib/interfaces/otp.interface.ts:31](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L31)
 
 ___
 
@@ -41,7 +41,7 @@ The number of digits in the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:36](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L36)
+[lib/interfaces/otp.interface.ts:36](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L36)
 
 ___
 
@@ -53,7 +53,7 @@ The header to use for the OTP in the request.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:46](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L46)
+[lib/interfaces/otp.interface.ts:46](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L46)
 
 ___
 
@@ -65,7 +65,7 @@ The issuer of the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:16](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L16)
+[lib/interfaces/otp.interface.ts:16](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L16)
 
 ___
 
@@ -77,7 +77,7 @@ Whether to include the issuer in the OTP label.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:26](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L26)
+[lib/interfaces/otp.interface.ts:26](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L26)
 
 ___
 
@@ -89,7 +89,7 @@ The label of the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:21](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L21)
+[lib/interfaces/otp.interface.ts:21](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L21)
 
 ___
 
@@ -117,7 +117,7 @@ A function that returns the OTP from the request.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:56](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L56)
+[lib/interfaces/otp.interface.ts:56](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L56)
 
 ___
 
@@ -129,7 +129,7 @@ The period, in seconds, for which the OTP is valid.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:41](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L41)
+[lib/interfaces/otp.interface.ts:41](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L41)
 
 ___
 
@@ -157,7 +157,7 @@ A function that returns the request from the execution context.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:61](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L61)
+[lib/interfaces/otp.interface.ts:61](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L61)
 
 ___
 
@@ -185,4 +185,4 @@ A function that returns the secret to use for generating the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:51](https://github.com/mwognicki/nestjs-otp/blob/d42d984/lib/interfaces/otp.interface.ts#L51)
+[lib/interfaces/otp.interface.ts:51](https://github.com/mwognicki/nestjs-otp/blob/651fe0d/lib/interfaces/otp.interface.ts#L51)
