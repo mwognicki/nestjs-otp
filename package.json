@@ -1,6 +1,6 @@
 {
   "name": "@ognicki/nestjs-otp",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "OTP (One-Time Password) module for NestJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
