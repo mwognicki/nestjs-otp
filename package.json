@@ -4,9 +4,24 @@
   "description": "OTP (One-Time Password) module for NestJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com:mwognicki/nestjs-otp.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mwognicki/nestjs-otp"
+  },
+  "bugs": {
+    "url": "https://github.com/mwognicki/nestjs-otp/issues"
+  },
   "author": "Marek Kapusta-Ognicki <marek@ognicki.pro>",
   "license": "MIT",
+  "keywords": [
+    "NestJS",
+    "OTP",
+    "authentication",
+    "two-factor authentication",
+    "OTP authentication",
+    "security",
+    "authentication module"
+  ],
   "scripts": {
     "build": "rimraf -rf dist && tsc -p tsconfig.json",
     "build:docs": "npx typedoc --out docs lib/index.ts --plugin typedoc-plugin-markdown",
