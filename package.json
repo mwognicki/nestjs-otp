@@ -4,6 +4,9 @@
   "description": "OTP (One-Time Password) module for NestJS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mwognicki/nestjs-otp"
