@@ -44,26 +44,31 @@ const createSecretResolver = (mock: Function) => {
 };
 
 describe('OtpModule', () => {
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
+
   describe('otp resolver', () => {
     it('should get OTP from header', async () => {
       const otpServiceMock = jest
         .spyOn(OtpService.prototype, 'verify')
         .mockImplementation(async () => true);
 
+      const secret = '654321', token = '123456';
+
       const otp = await setup({
-        secretResolver: () => '654321',
+        secretResolver: () => secret,
       });
 
       await request(otp.getHttpServer())
         .get('/test')
-        .set('X-One-Time-Password', '123456')
+        .set('X-One-Time-Password', token)
         .expect(200);
 
-      expect(otpServiceMock).toHaveBeenNthCalledWith(1, '123456', '654321');
+      expect(otpServiceMock).toHaveBeenNthCalledWith(1, token, secret);
 
       otpServiceMock.mockRestore();
-
-      jest.clearAllMocks();
     });
 
     it('should get OTP from header when header name is custom (failed)', async () => {
@@ -71,20 +76,20 @@ describe('OtpModule', () => {
         .spyOn(OtpService.prototype, 'verify')
         .mockImplementation(async () => true);
 
+      const secret = '654321', token = '123456';
+
       const otp = await setup({
-        secretResolver: () => '654321',
+        secretResolver: () => secret,
       });
 
       await request(otp.getHttpServer())
         .get('/test')
-        .set('X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog', '123456')
+        .set('X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog', token)
         .expect(401);
 
       expect(otpServiceMock).not.toHaveBeenCalled();
 
       otpServiceMock.mockRestore();
-
-      jest.clearAllMocks();
     });
 
     it('should get OTP from header when header name is custom (success)', async () => {
@@ -92,21 +97,21 @@ describe('OtpModule', () => {
         .spyOn(OtpService.prototype, 'verify')
         .mockImplementation(async () => true);
 
+      const secret = '654321', token = '123456';
+
       const otp = await setup({
-        secretResolver: () => '654321',
+        secretResolver: () => secret,
         header: 'X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog',
       });
 
       await request(otp.getHttpServer())
         .get('/test')
-        .set('X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog', '123456')
+        .set('X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog', token)
         .expect(200);
 
-      expect(otpServiceMock).toHaveBeenNthCalledWith(1, '123456', '654321');
+      expect(otpServiceMock).toHaveBeenNthCalledWith(1, token, secret);
 
       otpServiceMock.mockRestore();
-
-      jest.clearAllMocks();
     });
   });
 
@@ -128,9 +133,7 @@ describe('OtpModule', () => {
       expect(requestResolver).toHaveBeenCalled();
       expect(otpResolver).toHaveBeenCalled();
       expect(secretResolver).toHaveBeenCalled();
-
-      jest.clearAllMocks();
-    }, 5000);
+    });
 
     it('should set up the secret resolver as class', async () => {
       const secretResolver = jest.fn();
@@ -151,8 +154,7 @@ describe('OtpModule', () => {
       expect(otpResolver).toHaveBeenCalled();
       expect(secretResolver).toHaveBeenCalled();
 
-      jest.clearAllMocks();
-    }, 5000);
+    });
   });
 
   describe('validation', () => {
@@ -161,14 +163,16 @@ describe('OtpModule', () => {
         .spyOn(OtpService.prototype, 'verify')
         .mockImplementation(async () => false);
 
+      const secret = '654321', token = '123456';
+
       const otp = await setup({
-        secretResolver: () => '654321',
+        secretResolver: () => secret,
         digits: 8,
       });
 
       const response = await request(otp.getHttpServer())
         .get('/test')
-        .set('X-One-Time-Password', '123456')
+        .set('X-One-Time-Password', token)
         .expect(401);
 
       expect(JSON.parse(response.text)).toMatchObject({
@@ -176,8 +180,6 @@ describe('OtpModule', () => {
       });
 
       otpServiceMock.mockRestore();
-
-      jest.clearAllMocks();
     });
 
     it('should throw no OTP exception', async () => {
@@ -185,8 +187,10 @@ describe('OtpModule', () => {
         .spyOn(OtpService.prototype, 'verify')
         .mockImplementation(async () => false);
 
+      const secret = '654321'
+
       const otp = await setup({
-        secretResolver: () => '654321',
+        secretResolver: () => secret
       });
 
       const response = await request(otp.getHttpServer())
@@ -198,8 +202,6 @@ describe('OtpModule', () => {
       });
 
       otpServiceMock.mockRestore();
-
-      jest.clearAllMocks();
     });
 
     it('should throw no secret exception', async () => {
