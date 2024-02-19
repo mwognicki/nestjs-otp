@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/mwognicki/nestjs-otp/issues"
   },
-  "author": "Marek Kapusta-Ognicki <marek@ognicki.pro>",
+  "author": "Marek Kapusta-Ognicki <marek@ognicki.pro> (https://www.ognicki.pro/)",
   "license": "MIT",
   "keywords": [
     "NestJS",
