@@ -51,7 +51,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:25](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L25)
+[lib/otp.service.ts:26](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L26)
 
 ## Properties
 
@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[lib/otp.service.ts:25](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L25)
+[lib/otp.service.ts:26](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L26)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[lib/otp.service.ts:23](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L23)
+[lib/otp.service.ts:24](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L24)
 
 ## Accessors
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[lib/otp.service.ts:27](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L27)
+[lib/otp.service.ts:28](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L28)
 
 ## Methods
 
@@ -109,7 +109,7 @@ The generated TOTP object.
 
 #### Defined in
 
-[lib/otp.service.ts:76](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L76)
+[lib/otp.service.ts:77](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L77)
 
 ___
 
@@ -127,7 +127,7 @@ OnModuleInit.onModuleInit
 
 #### Defined in
 
-[lib/otp.service.ts:31](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L31)
+[lib/otp.service.ts:32](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L32)
 
 ___
 
@@ -151,7 +151,7 @@ Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/otp.service.ts:65](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L65)
+[lib/otp.service.ts:66](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L66)
 
 ___
 
@@ -175,7 +175,7 @@ A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:114](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L114)
+[lib/otp.service.ts:115](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L115)
 
 ___
 
@@ -199,7 +199,7 @@ A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:131](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L131)
+[lib/otp.service.ts:132](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L132)
 
 ___
 
@@ -213,7 +213,7 @@ Generate a random secret for the OTP.
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `length` | `number` | `16` | The length of the secret, in characters. |
+| `length` | `number` | `OTP_DEFAULT_SECRET_LENGTH` | The length of the secret, in characters. |
 
 #### Returns
 
@@ -223,7 +223,7 @@ The generated secret.
 
 #### Defined in
 
-[lib/otp.service.ts:42](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L42)
+[lib/otp.service.ts:43](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L43)
 
 ___
 
@@ -237,7 +237,7 @@ ___
 
 #### Defined in
 
-[lib/otp.service.ts:191](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L191)
+[lib/otp.service.ts:192](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L192)
 
 ___
 
@@ -251,7 +251,7 @@ ___
 
 #### Defined in
 
-[lib/otp.service.ts:142](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L142)
+[lib/otp.service.ts:143](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L143)
 
 ___
 
@@ -281,4 +281,4 @@ If the token is invalid and `shouldThrow` is true.
 
 #### Defined in
 
-[lib/otp.service.ts:91](https://github.com/mwognicki/nestjs-otp/blob/35d8f2c/lib/otp.service.ts#L91)
+[lib/otp.service.ts:92](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L92)

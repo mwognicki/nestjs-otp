@@ -2,10 +2,13 @@
 
 # NestJS OTP Authentication Module
 
-`@ognicki/nestjs-otp` is a NestJS module designed to facilitate OTP (One-Time Password)
-authentication within your NestJS applications without relying on external APIs.
-Module includes dynamic module registration, an `OtpService` for managing OTP
-pairing and verification, and an `OtpGuard` to ensure the validity of provided OTP tokens.
+`@ognicki/nestjs-otp` is a NestJS module designed to provide OTP (One-Time Password) 
+authentication within your NestJS applications without relying on external APIs. The 
+module includes dynamic module registration, an `OtpService` for managing OTP pairing and 
+verification, and an `OtpGuard` to ensure the validity of provided OTP tokens.
+
+> **You can use authenticator applications to generate OTP tokens,** and they will be handled
+> by `OtpModule`.
 
 ## Who's Behind?
 
@@ -18,44 +21,58 @@ me at [www.ognicki.pro](https://www.ognicki.pro) or drop me a message at [marek@
 
 <summary>What is OTP Authentication?</summary>
 
-## What is OTP Authentication?
-
-OTP (One-Time Password) authentication is a method used to verify a user's identity
-through the use of a unique, single-use password. Unlike traditional passwords, which
-remain static until changed by the user, OTPs are temporary and expire after a short
-period of time or upon single use.
+One-Time Password (OTP) authentication is a method of verifying a user's identity by 
+using a unique, one-time password. Unlike traditional passwords, which remain static 
+until changed by the user, OTPs are temporary and expire after a short period of time or 
+after a single use.
 
 ### Authenticator Applications
 
-Authenticator applications are a popular form of OTP authentication. These applications
-generate time-based OTPs (TOTPs) or HMAC-based OTPs (HOTPs) that can be used to
-authenticate users across various services and platforms.
+Authenticator applications are a popular form of OTP authentication. These applications 
+generate time-based OTPs (TOTPs) or HMAC-based OTPs (HOTPs) that can be used to authenticate
+users across multiple services and platforms.
+
+> The `otpauth` package under the hood of this module works with time-based OTPs.
+
+#### Time-Based OTPs
+
+Tokens in time-based one-time passwords (TOTPs) are generated using cryptographic algorithms. 
+A secret key shared between the authentication device and the server is scrambled with the 
+timestamp using one of the cryptographic algorithms and optionally processed to match the 
+pre-defined length of a token.
+
+**This means one secret per user, not per application.** 
+
+The optimal solution would be to have 
+one secret per user per device, but this is not implemented in the module (yet?). Of course, 
+in production environments, the secrets should not be stored on the server side without 
+encryption, as any unwanted party could intercept them and thus have all they need to generate 
+OTP tokens, thus violating the security of the application.
 
 </details>
 
 ## Module Dependencies
 
-The `@ognicki/nestjs-otp` module leverages the following dependencies:
+The `@ognicki/nestjs-otp` module uses the following dependencies:
 
 ### `otpauth` Package
 
 > See https://www.npmjs.com/package/otpauth for more information.
 
-The `otpauth` package is utilized for generating and validating OTPs (One-Time Passwords)
-according to the TOTP (Time-Based One-Time Password) and HOTP (HMAC-Based One-Time
-Password) algorithms. This package provides robust functionality for handling OTP
-generation, ensuring secure and reliable authentication processes.
+The `otpauth` package is used to generate and validate OTPs (One-Time Passwords) using the 
+TOTP (Time-Based One-Time Password) and HOTP (HMAC-Based One-Time Password) algorithms. 
+The package provides a complete OTP management solution to enable secure and reliable 
+authentication processes.
 
 ### `qrcode` Package
 
 > See https://www.npmjs.com/package/qrcode for more information.
 
-The `qrcode` package is employed for generating QR codes that can be scanned by
-authenticator applications during the initial setup process. QR codes provide a
-convenient way for users to import shared secret keys into their authenticator
-applications, streamlining the setup of OTP authentication. By integrating qrcode,
-the `@ognicki/nestjs-otp` module facilitates a seamless user experience when
-configuring OTP authentication.
+The `qrcode` package is used to generate QR codes to be scanned by authenticator applications 
+during the initial setup process. QR codes provide a convenient way for users to import shared 
+secret keys into their authenticator applications, simplifying the setup of OTP authentication. 
+By integrating `qrcode`, the module provides a consistent and painless way for you to configure 
+OTP authentication. when configuring OTP authentication.
 
 ## Installation
 
@@ -69,12 +86,12 @@ yarn add @ognicki/nestjs-otp
 
 ## Usage
 
-**Secret is a string assigned individually to each user. It should never be set up
-globally per application.**
+**Secret is a string assigned to each user individually. It should never be set globally per 
+application.**
 
-In most scenarios, the `OtpService` might not be directly utilized, as the primary
-logic for OTP authentication is handled efficiently by the `OtpGuard`. This guard
-orchestrates the OTP authentication process seamlessly within your NestJS application.
+In most scenarios, the `OtpService` may not be used directly, since the primary logic 
+for OTP authentication logic is done efficiently by the `OtpGuard`. The guard manages the 
+OTP authentication process inside your NestJS application without any hassle.
 
 The lifecycle of the `OtpGuard` involves the following steps:
 
