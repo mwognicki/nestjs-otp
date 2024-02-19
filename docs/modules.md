@@ -15,3 +15,18 @@
 - [IOtpModuleAsyncOptions](interfaces/IOtpModuleAsyncOptions.md)
 - [IOtpModuleOptions](interfaces/IOtpModuleOptions.md)
 - [IOtpPairOpts](interfaces/IOtpPairOpts.md)
+- [IOtpSecretResolver](interfaces/IOtpSecretResolver.md)
+
+### Type Aliases
+
+- [TOtpSecretResolver](modules.md#totpsecretresolver)
+
+## Type Aliases
+
+### TOtpSecretResolver
+
+Ƭ **TOtpSecretResolver**: [`IOtpSecretResolver`](interfaces/IOtpSecretResolver.md) \| (`request?`: `Request`) => `string` \| `Promise`\<`string`\>
+
+#### Defined in
+
+[lib/interfaces/otp.interface.ts:15](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L15)

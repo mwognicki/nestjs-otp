@@ -1,17 +1,61 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { OTP_CONFIG_TOKEN } from './otp.constants';
+import {
+  Inject,
+  Injectable,
+  Logger,
+  OnModuleInit,
+  UnauthorizedException,
+} from '@nestjs/common';
+import {
+  OTP_CONFIG_TOKEN,
+  OTP_DEFAULT_HEADER,
+  OTP_DEFAULT_SECRET_LENGTH,
+  OTP_MAX_SECURE_PERIOD,
+  OTP_MIN_DIGITS,
+  OTP_MIN_PERIOD,
+  OTP_MIN_SECURE_DIGITS,
+  OTP_MIN_SECURE_PERIOD,
+} from './otp.constants';
 import { IOtpModuleOptions, IOtpPairOpts } from './interfaces';
 import * as OTPAuth from 'otpauth';
 import * as QRCode from 'qrcode';
 
 @Injectable()
-export class OtpService {
-  constructor(
-    @Inject(OTP_CONFIG_TOKEN) private readonly _config: IOtpModuleOptions,
-  ) {}
+export class OtpService implements OnModuleInit {
+  private readonly logger = new Logger(OtpService.name);
 
-  get config(): IOtpModuleOptions {
-    return this._config;
+  constructor(@Inject(OTP_CONFIG_TOKEN) private _config: IOtpModuleOptions) {}
+
+  get config(): Required<IOtpModuleOptions> {
+    return this._config as Required<IOtpModuleOptions>;
+  }
+
+  onModuleInit() {
+    this.validateOpts();
+    this.setDefaultOpts();
+  }
+
+  /**
+   * Generate a random secret for the OTP.
+   *
+   * @param length - The length of the secret, in characters.
+   * @returns The generated secret.
+   */
+  secret(length: number = OTP_DEFAULT_SECRET_LENGTH): string {
+    const secret = new OTPAuth.Secret({
+      size: length * 4, // 4 bytes per character in ASCII
+    });
+
+    const representations: Record<
+      Required<IOtpModuleOptions>['secretMethod'],
+      string
+    > = {
+      fromUTF8: 'utf8',
+      fromLatin1: 'latin1',
+      fromBase32: 'base32',
+      fromHex: 'hex',
+    };
+
+    return secret[representations[this.config.secretMethod]];
   }
 
   /**
@@ -20,11 +64,21 @@ export class OtpService {
    * @returns {string} Link for pairing with authenticator application.
    */
   async pair(opts: IOtpPairOpts): Promise<string> {
-    const otp = new OTPAuth.TOTP({
-      ...this.config,
-      secret: OTPAuth.Secret.fromUTF8(opts.secret),
-    });
+    const otp = this.getTOTP(opts);
     return otp.toString();
+  }
+
+  /**
+   * Generate a TOTP object with the given options.
+   *
+   * @param opts - Options for generating the TOTP object.
+   * @returns The generated TOTP object.
+   */
+  getTOTP(opts: IOtpPairOpts): OTPAuth.TOTP {
+    return new OTPAuth.TOTP({
+      ...this.config,
+      secret: OTPAuth.Secret[this.config.secretMethod](opts.secret),
+    });
   }
 
   /**
@@ -40,9 +94,8 @@ export class OtpService {
     secret: string,
     shouldThrow = true,
   ): Promise<boolean> {
-    const otp = new OTPAuth.TOTP({
-      ...this.config,
-      secret: OTPAuth.Secret.fromUTF8(secret),
+    const otp = this.getTOTP({
+      secret,
     });
     const res = otp.validate({
       token,
@@ -87,7 +140,65 @@ export class OtpService {
     });
   }
 
-  getOTPHeaderName(): string {
-    return this.config.header ?? 'x-one-time-password';
+  private validateOpts() {
+    if (!this.config.secretResolver) {
+      this.logger.warn(
+        'No secret resolver provided. Module will not work properly!',
+      );
+    }
+
+    if (!this.config.label) {
+      this.logger.warn('No label provided for OTP, defaulting to "OTP"');
+      this.config.label = 'OTP';
+    }
+
+    if (!this.config.issuer) {
+      this.logger.warn('No issuer provided for OTP, defaulting to "OTP"');
+      this.config.issuer = 'OTP';
+    }
+
+    if (
+      this.config.digits !== undefined &&
+      this.config.digits <= OTP_MIN_DIGITS
+    ) {
+      this.logger.warn(
+        `Invalid digits provided for OTP ${this.config.digits}, defaulting to ${OTP_MIN_SECURE_DIGITS}`,
+      );
+      this.config.digits = OTP_MIN_SECURE_DIGITS;
+    } else if (this.config.digits < OTP_MIN_SECURE_DIGITS) {
+      this.logger.warn(
+        `Insecure number of digits provided for OTP (${this.config.digits})`,
+      );
+    }
+
+    if (
+      this.config.period !== undefined &&
+      this.config.period <= OTP_MIN_PERIOD
+    ) {
+      this.logger.warn(
+        `Invalid period provided for OTP ${this.config.period}, defaulting to ${OTP_MIN_SECURE_PERIOD}`,
+      );
+      this.config.period = OTP_MIN_SECURE_PERIOD;
+    } else if (
+      this.config.period < OTP_MIN_SECURE_PERIOD ||
+      this.config.period > OTP_MAX_SECURE_PERIOD
+    ) {
+      this.logger.warn(
+        `Consider using a different period for OTP instead of ${this.config.period}`,
+      );
+    }
+  }
+
+  private setDefaultOpts() {
+    const defaults: Omit<IOtpModuleOptions, 'label' | 'issuer'> = {
+      issuerInLabel: false,
+      algorithm: 'SHA1',
+      digits: OTP_MIN_SECURE_DIGITS,
+      period: OTP_MIN_SECURE_PERIOD,
+      header: OTP_DEFAULT_HEADER,
+      window: 1,
+      secretMethod: 'fromUTF8',
+    };
+    this._config = { ...defaults, ...this.config };
   }
 }

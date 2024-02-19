@@ -6,6 +6,16 @@ import {
 } from '@nestjs/common';
 
 import { Request } from 'express';
+import * as OTPAuth from 'otpauth/dist/otpauth';
+
+export interface IOtpSecretResolver {
+  resolve: (request?: Request) => string | Promise<string>;
+}
+
+export type TOtpSecretResolver =
+  | IOtpSecretResolver
+  | ((request?: Request) => string | Promise<string>);
+
 /**
  * Options for the OTP module.
  */
@@ -48,17 +58,27 @@ export interface IOtpModuleOptions {
   /**
    * A function that returns the secret to use for generating the OTP.
    */
-  secretResolver?: (request?: Request) => Promise<string>;
+  secretResolver?: TOtpSecretResolver | undefined;
 
   /**
    * A function that returns the OTP from the request.
    */
-  otpResolver?: (request: Request) => string | Promise<string>;
+  otpResolver?: (request: Request) => string | Promise<string> | undefined;
 
   /**
    * A function that returns the request from the execution context.
    */
-  requestResolver?: (context: ExecutionContext) => Request;
+  requestResolver?: (context: ExecutionContext) => Request | undefined;
+
+  /**
+   * Window of counter values to test.
+   */
+  window?: number;
+
+  /**
+   * Method used for transforming the secret into TOTP-compatible format. Default: 'fromUTF8'.
+   */
+  secretMethod?: Exclude<keyof typeof OTPAuth.Secret, 'prototype'>;
 }
 
 /**

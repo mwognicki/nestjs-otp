@@ -17,7 +17,9 @@ Options for the OTP module.
 - [otpResolver](IOtpModuleOptions.md#otpresolver)
 - [period](IOtpModuleOptions.md#period)
 - [requestResolver](IOtpModuleOptions.md#requestresolver)
+- [secretMethod](IOtpModuleOptions.md#secretmethod)
 - [secretResolver](IOtpModuleOptions.md#secretresolver)
+- [window](IOtpModuleOptions.md#window)
 
 ## Properties
 
@@ -29,7 +31,7 @@ The algorithm to use for generating the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:31](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L31)
+[lib/interfaces/otp.interface.ts:41](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L41)
 
 ___
 
@@ -41,7 +43,7 @@ The number of digits in the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:36](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L36)
+[lib/interfaces/otp.interface.ts:46](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L46)
 
 ___
 
@@ -53,7 +55,7 @@ The header to use for the OTP in the request.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:46](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L46)
+[lib/interfaces/otp.interface.ts:56](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L56)
 
 ___
 
@@ -65,7 +67,7 @@ The issuer of the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:16](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L16)
+[lib/interfaces/otp.interface.ts:26](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L26)
 
 ___
 
@@ -77,7 +79,7 @@ Whether to include the issuer in the OTP label.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:26](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L26)
+[lib/interfaces/otp.interface.ts:36](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L36)
 
 ___
 
@@ -89,13 +91,13 @@ The label of the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:21](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L21)
+[lib/interfaces/otp.interface.ts:31](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L31)
 
 ___
 
 ### otpResolver
 
-• `Optional` **otpResolver**: (`request`: `Request`) => `string` \| `Promise`\<`string`\>
+• `Optional` **otpResolver**: (`request`: `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\>) => `string` \| `Promise`\<`string`\>
 
 A function that returns the OTP from the request.
 
@@ -109,7 +111,7 @@ A function that returns the OTP from the request.
 
 | Name | Type |
 | :------ | :------ |
-| `request` | `Request` |
+| `request` | `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\> |
 
 ##### Returns
 
@@ -117,7 +119,7 @@ A function that returns the OTP from the request.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:56](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L56)
+[lib/interfaces/otp.interface.ts:66](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L66)
 
 ___
 
@@ -129,19 +131,19 @@ The period, in seconds, for which the OTP is valid.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:41](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L41)
+[lib/interfaces/otp.interface.ts:51](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L51)
 
 ___
 
 ### requestResolver
 
-• `Optional` **requestResolver**: (`context`: `ExecutionContext`) => `Request`
+• `Optional` **requestResolver**: (`context`: `ExecutionContext`) => `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\>
 
 A function that returns the request from the execution context.
 
 #### Type declaration
 
-▸ (`context`): `Request`
+▸ (`context`): `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\>
 
 A function that returns the request from the execution context.
 
@@ -153,36 +155,44 @@ A function that returns the request from the execution context.
 
 ##### Returns
 
-`Request`
+`Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\>
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:61](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L61)
+[lib/interfaces/otp.interface.ts:71](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L71)
+
+___
+
+### secretMethod
+
+• `Optional` **secretMethod**: ``"fromLatin1"`` \| ``"fromUTF8"`` \| ``"fromBase32"`` \| ``"fromHex"``
+
+Method used for transforming the secret into TOTP-compatible format. Default: 'fromUTF8'.
+
+#### Defined in
+
+[lib/interfaces/otp.interface.ts:81](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L81)
 
 ___
 
 ### secretResolver
 
-• `Optional` **secretResolver**: (`request?`: `Request`) => `Promise`\<`string`\>
+• `Optional` **secretResolver**: [`TOtpSecretResolver`](../modules.md#totpsecretresolver)
 
 A function that returns the secret to use for generating the OTP.
-
-#### Type declaration
-
-▸ (`request?`): `Promise`\<`string`\>
-
-A function that returns the secret to use for generating the OTP.
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `request?` | `Request` |
-
-##### Returns
-
-`Promise`\<`string`\>
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:51](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/interfaces/otp.interface.ts#L51)
+[lib/interfaces/otp.interface.ts:61](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L61)
+
+___
+
+### window
+
+• `Optional` **window**: `number`
+
+Window of counter values to test.
+
+#### Defined in
+
+[lib/interfaces/otp.interface.ts:76](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L76)

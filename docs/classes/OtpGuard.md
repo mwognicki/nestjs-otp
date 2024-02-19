@@ -2,7 +2,7 @@
 
 # Class: OtpGuard
 
-A guard that verifies an one-time password (OTP) sent with a request.
+A guard that verifies a one-time password (OTP) sent with a request.
 
 ## Implements
 
@@ -21,9 +21,12 @@ A guard that verifies an one-time password (OTP) sent with a request.
 ### Methods
 
 - [canActivate](OtpGuard.md#canactivate)
-- [getOTP](OtpGuard.md#getotp)
+- [extractOtpToken](OtpGuard.md#extractotptoken)
 - [getRequest](OtpGuard.md#getrequest)
 - [getSecret](OtpGuard.md#getsecret)
+- [validateOTP](OtpGuard.md#validateotp)
+- [validateSecret](OtpGuard.md#validatesecret)
+- [resolveSecretResolver](OtpGuard.md#resolvesecretresolver)
 
 ## Constructors
 
@@ -43,7 +46,7 @@ A guard that verifies an one-time password (OTP) sent with a request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:15](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/guards/otp.guard.ts#L15)
+[lib/guards/otp.guard.ts:14](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L14)
 
 ## Properties
 
@@ -53,7 +56,7 @@ A guard that verifies an one-time password (OTP) sent with a request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:15](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/guards/otp.guard.ts#L15)
+[lib/guards/otp.guard.ts:14](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L14)
 
 ## Methods
 
@@ -79,21 +82,21 @@ CanActivate.canActivate
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:21](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/guards/otp.guard.ts#L21)
+[lib/guards/otp.guard.ts:39](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L39)
 
 ___
 
-### getOTP
+### extractOtpToken
 
-▸ **getOTP**(`request`): `Promise`\<`string`\>
+▸ **extractOtpToken**(`request`): `Promise`\<`string`\>
 
-Gets the OTP from the request.
+Gets the OTP from the request or OTP token resolver if configured.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `request` | `Request` | The request. |
+| `request` | `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\> | The request. |
 
 #### Returns
 
@@ -103,7 +106,7 @@ The OTP.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:57](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/guards/otp.guard.ts#L57)
+[lib/guards/otp.guard.ts:76](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L76)
 
 ___
 
@@ -111,7 +114,7 @@ ___
 
 ▸ **getRequest**(`context`): `any`
 
-Gets the request from the execution context.
+Gets the request from the execution context or request resolver if configured.
 
 #### Parameters
 
@@ -127,15 +130,21 @@ The request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:45](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/guards/otp.guard.ts#L45)
+[lib/guards/otp.guard.ts:64](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L64)
 
 ___
 
 ### getSecret
 
-▸ **getSecret**(): `Promise`\<`string`\>
+▸ **getSecret**(`request`): `Promise`\<`string`\>
 
 Gets the secret used for OTP verification.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `request` | `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\> |
 
 #### Returns
 
@@ -145,4 +154,76 @@ The secret.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:33](https://github.com/mwognicki/nestjs-otp/blob/3c1985d/lib/guards/otp.guard.ts#L33)
+[lib/guards/otp.guard.ts:55](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L55)
+
+___
+
+### validateOTP
+
+▸ **validateOTP**(`otp?`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `otp?` | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[lib/guards/otp.guard.ts:98](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L98)
+
+___
+
+### validateSecret
+
+▸ **validateSecret**(`secret?`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `secret?` | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[lib/guards/otp.guard.ts:92](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L92)
+
+___
+
+### resolveSecretResolver
+
+▸ **resolveSecretResolver**(`options`): (`request?`: `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\>) => `string` \| `Promise`\<`string`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `Pick`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md), ``"secretResolver"``\> |
+
+#### Returns
+
+`fn`
+
+▸ (`request?`): `string` \| `Promise`\<`string`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `request?` | `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\> |
+
+##### Returns
+
+`string` \| `Promise`\<`string`\>
+
+#### Defined in
+
+[lib/guards/otp.guard.ts:16](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/guards/otp.guard.ts#L16)
