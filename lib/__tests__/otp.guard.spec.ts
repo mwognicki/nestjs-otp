@@ -153,7 +153,6 @@ describe('OtpModule', () => {
       expect(requestResolver).toHaveBeenCalled();
       expect(otpResolver).toHaveBeenCalled();
       expect(secretResolver).toHaveBeenCalled();
-
     });
   });
 
@@ -222,8 +221,6 @@ describe('OtpModule', () => {
       });
 
       otpServiceMock.mockRestore();
-
-      jest.clearAllMocks();
     });
 
     it('should set defaults', async () => {
