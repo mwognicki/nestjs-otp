@@ -8,6 +8,7 @@ import {
 import {
   OTP_CONFIG_TOKEN,
   OTP_DEFAULT_HEADER,
+  OTP_DEFAULT_SECRET_LENGTH,
   OTP_MAX_SECURE_PERIOD,
   OTP_MIN_DIGITS,
   OTP_MIN_PERIOD,
@@ -39,7 +40,7 @@ export class OtpService implements OnModuleInit {
    * @param length - The length of the secret, in characters.
    * @returns The generated secret.
    */
-  secret(length: number = 16): string {
+  secret(length: number = OTP_DEFAULT_SECRET_LENGTH): string {
     const secret = new OTPAuth.Secret({
       size: length * 4, // 4 bytes per character in ASCII
     });
@@ -54,7 +55,7 @@ export class OtpService implements OnModuleInit {
       fromHex: 'hex',
     };
 
-    return secret[representations[this.config.secretMethod!]];
+    return secret[representations[this.config.secretMethod]];
   }
 
   /**

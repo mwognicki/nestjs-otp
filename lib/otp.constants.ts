@@ -32,3 +32,8 @@ export const OTP_MAX_SECURE_PERIOD = 120;
  * The default header used for sending OTPs.
  */
 export const OTP_DEFAULT_HEADER = 'X-One-Time-Password';
+
+/**
+ * The default secret length (for UTF-8 characters).
+ */
+export const OTP_DEFAULT_SECRET_LENGTH = 16;
