@@ -100,7 +100,7 @@ export class OtpGuard implements CanActivate {
       throw new NoOtpException();
     }
 
-    if (otp.length !== this.otpService.config.digits!) {
+    if (otp.length !== this.otpService.config.digits) {
       throw new OtpInvalidException();
     }
   }
