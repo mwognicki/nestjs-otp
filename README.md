@@ -5,6 +5,11 @@ authentication within your NestJS applications without relying on external APIs.
 Module includes dynamic module registration, an `OtpService` for managing OTP
 pairing and verification, and an `OtpGuard` to ensure the validity of provided OTP tokens.
 
+## Who's Behind?
+
+Hello, my name is Marek, and I am a fullstack developer. You can find out more about
+me at [www.ognicki.pro](https://www.ognicki.pro) or drop me a message at [marek@ognicki.pro](mailto:marek@ognicki.pro).
+
 ## What is OTP Authentication?
 
 <details>
