@@ -107,8 +107,9 @@ export class OtpGuard implements CanActivate {
    * @param shouldThrow - Whether to throw an exception if the token is invalid.
    * @returns Whether the token is valid.
    * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
+   * @protected
    */
-  private async verify(
+  protected async verify(
     token: string,
     secret: string,
     shouldThrow = true,
