@@ -18,11 +18,11 @@ import { OTP_CONFIG_TOKEN } from '../otp.constants';
  */
 @Injectable()
 export class OtpGuard implements CanActivate {
-  constructor(
-    private readonly otpService: OtpService,
-    @Inject(OTP_CONFIG_TOKEN)
-    private readonly config: Required<IOtpModuleOptions>,
-  ) {}
+  @Inject(OtpService)
+  private readonly otpService: OtpService;
+
+  @Inject(OTP_CONFIG_TOKEN)
+  protected readonly config: Required<IOtpModuleOptions>;
 
   private static resolveSecretResolver(
     options: Pick<IOtpModuleOptions, 'secretResolver'>,
