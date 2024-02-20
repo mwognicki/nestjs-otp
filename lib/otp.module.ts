@@ -60,7 +60,7 @@ export class OtpModule {
   private static resolveConfig(
     config: IOtpModuleOptions,
   ): Required<IOtpModuleOptions> {
-    return OtpModule.resolveConfig(OtpModule.validateOpts(config));
+    return OtpModule.setDefaultOpts(OtpModule.validateOpts(config));
   }
 
   private static validateOpts(config: IOtpModuleOptions) {
@@ -68,7 +68,7 @@ export class OtpModule {
 
     if (!config.secretResolver) {
       logger.warn(
-        'No secret resolver provided. Module will not work properly!',
+        'No secret resolver provided. Module might not work properly!',
       );
     }
 

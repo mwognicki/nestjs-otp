@@ -30,4 +30,4 @@
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:12](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/interfaces/otp.interface.ts#L12)
+[lib/interfaces/otp.interface.ts:12](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/interfaces/otp.interface.ts#L12)

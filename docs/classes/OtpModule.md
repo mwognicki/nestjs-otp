@@ -12,6 +12,9 @@
 
 - [register](OtpModule.md#register)
 - [registerAsync](OtpModule.md#registerasync)
+- [resolveConfig](OtpModule.md#resolveconfig)
+- [setDefaultOpts](OtpModule.md#setdefaultopts)
+- [validateOpts](OtpModule.md#validateopts)
 
 ## Constructors
 
@@ -43,7 +46,7 @@ Registers the OTP module.
 
 #### Defined in
 
-[lib/otp.module.ts:12](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.module.ts#L12)
+[lib/otp.module.ts:20](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/otp.module.ts#L20)
 
 ___
 
@@ -65,4 +68,64 @@ Registers the OTP module asynchronously.
 
 #### Defined in
 
-[lib/otp.module.ts:30](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.module.ts#L30)
+[lib/otp.module.ts:38](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/otp.module.ts#L38)
+
+___
+
+### resolveConfig
+
+▸ **resolveConfig**(`config`): `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `config` | [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md) |
+
+#### Returns
+
+`Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
+
+#### Defined in
+
+[lib/otp.module.ts:60](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/otp.module.ts#L60)
+
+___
+
+### setDefaultOpts
+
+▸ **setDefaultOpts**(`config`): `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `config` | [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md) |
+
+#### Returns
+
+`Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
+
+#### Defined in
+
+[lib/otp.module.ts:113](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/otp.module.ts#L113)
+
+___
+
+### validateOpts
+
+▸ **validateOpts**(`config`): [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `config` | [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md) |
+
+#### Returns
+
+[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)
+
+#### Defined in
+
+[lib/otp.module.ts:66](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/otp.module.ts#L66)

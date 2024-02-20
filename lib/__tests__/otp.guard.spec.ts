@@ -288,6 +288,9 @@ describe('OtpModule', () => {
       expect(loggerMock).toHaveBeenCalledWith(
         `Consider using a different period for OTP instead of 15`,
       );
+      expect(loggerMock).toHaveBeenCalledWith(
+        `No secret resolver provided. Module might not work properly!`,
+      );
     });
   });
 });
