@@ -27,7 +27,7 @@ export class OtpModule {
         },
         OtpService,
       ],
-      exports: [OtpService],
+      exports: [OTP_CONFIG_TOKEN, OtpService],
     };
   }
 
@@ -53,7 +53,7 @@ export class OtpModule {
         },
         OtpService,
       ],
-      exports: [OtpService],
+      exports: [OTP_CONFIG_TOKEN, OtpService],
     };
   }
 

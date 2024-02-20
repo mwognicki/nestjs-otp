@@ -1,6 +1,7 @@
 import {
   CanActivate,
   ExecutionContext,
+  Inject,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -10,13 +11,18 @@ import { NoSecretException } from '../exceptions/no-secret.exception';
 import { OtpInvalidException } from '../exceptions/otp-invalid.exception';
 import { NoOtpException } from '../exceptions/no-otp.exception';
 import { IOtpModuleOptions, IOtpSecretResolver } from '../interfaces';
+import { OTP_CONFIG_TOKEN } from '../otp.constants';
 
 /**
  * A guard that verifies a one-time password (OTP) sent with a request.
  */
 @Injectable()
 export class OtpGuard implements CanActivate {
-  constructor(private readonly otpService: OtpService) {}
+  constructor(
+    private readonly otpService: OtpService,
+    @Inject(OTP_CONFIG_TOKEN)
+    private readonly config: Required<IOtpModuleOptions>,
+  ) {}
 
   private static resolveSecretResolver(
     options: Pick<IOtpModuleOptions, 'secretResolver'>,
@@ -58,7 +64,7 @@ export class OtpGuard implements CanActivate {
    * @returns The secret.
    */
   async getSecret(request: Request): Promise<string | undefined> {
-    return OtpGuard.resolveSecretResolver(this.otpService.config)(request);
+    return OtpGuard.resolveSecretResolver(this.config)(request);
   }
 
   /**
@@ -67,8 +73,8 @@ export class OtpGuard implements CanActivate {
    * @returns The request.
    */
   getRequest(context: ExecutionContext) {
-    if (this.otpService.config.requestResolver) {
-      return this.otpService.config.requestResolver(context);
+    if (this.config.requestResolver) {
+      return this.config.requestResolver(context);
     }
     return context.switchToHttp().getRequest();
   }
@@ -79,10 +85,10 @@ export class OtpGuard implements CanActivate {
    * @returns The OTP.
    */
   async extractOtpToken(request: Request): Promise<string> {
-    if (this.otpService.config.otpResolver) {
-      return this.otpService.config.otpResolver(request);
+    if (this.config.otpResolver) {
+      return this.config.otpResolver(request);
     }
-    const otp = request.headers[this.otpService.config.header.toLowerCase()];
+    const otp = request.headers[this.config.header.toLowerCase()];
     if (!otp) {
       throw new NoOtpException();
     }
@@ -130,7 +136,7 @@ export class OtpGuard implements CanActivate {
       throw new NoOtpException();
     }
 
-    if (otp.length !== this.otpService.config.digits) {
+    if (otp.length !== this.config.digits) {
       throw new OtpInvalidException();
     }
   }

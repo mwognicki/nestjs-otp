@@ -8,11 +8,9 @@ import * as QRCode from 'qrcode';
 export class OtpService {
   private readonly logger = new Logger(OtpService.name);
 
-  constructor(@Inject(OTP_CONFIG_TOKEN) private _config: IOtpModuleOptions) {}
-
-  get config(): Required<IOtpModuleOptions> {
-    return this._config as Required<IOtpModuleOptions>;
-  }
+  constructor(
+    @Inject(OTP_CONFIG_TOKEN) private config: Required<IOtpModuleOptions>,
+  ) {}
 
   /**
    * Generate a random secret for the OTP.
