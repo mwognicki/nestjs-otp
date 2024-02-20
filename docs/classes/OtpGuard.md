@@ -48,7 +48,7 @@ A guard that verifies a one-time password (OTP) sent with a request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:25](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L25)
+[lib/guards/otp.guard.ts:22](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L22)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:22](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L22)
+[lib/guards/otp.guard.ts:24](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L24)
 
 ## Methods
 
@@ -84,7 +84,7 @@ CanActivate.canActivate
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:50](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L50)
+[lib/guards/otp.guard.ts:49](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L49)
 
 ___
 
@@ -108,7 +108,7 @@ The OTP.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:87](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L87)
+[lib/guards/otp.guard.ts:89](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L89)
 
 ___
 
@@ -132,7 +132,7 @@ The request.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:75](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L75)
+[lib/guards/otp.guard.ts:76](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L76)
 
 ___
 
@@ -156,7 +156,7 @@ The secret.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:66](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L66)
+[lib/guards/otp.guard.ts:66](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L66)
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:135](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L135)
+[lib/guards/otp.guard.ts:137](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L137)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:129](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L129)
+[lib/guards/otp.guard.ts:131](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L131)
 
 ___
 
@@ -226,7 +226,7 @@ If the token is invalid and `shouldThrow` is true.
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:112](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L112)
+[lib/guards/otp.guard.ts:114](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L114)
 
 ___
 
@@ -258,4 +258,4 @@ ___
 
 #### Defined in
 
-[lib/guards/otp.guard.ts:27](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/guards/otp.guard.ts#L27)
+[lib/guards/otp.guard.ts:26](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/guards/otp.guard.ts#L26)
