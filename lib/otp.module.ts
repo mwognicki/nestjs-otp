@@ -1,7 +1,8 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { OtpService } from './otp.service';
+import { OtpService } from './services';
 import { IOtpModuleAsyncOptions, IOtpModuleOptions } from './interfaces';
 import { OTP_CONFIG_TOKEN } from './otp.constants';
+import { OtpConfigResolver } from './otp.config-resolver';
 
 @Module({})
 export class OtpModule {
@@ -15,11 +16,11 @@ export class OtpModule {
       providers: [
         {
           provide: OTP_CONFIG_TOKEN,
-          useValue: opts,
+          useValue: OtpConfigResolver.resolveConfig(opts),
         },
         OtpService,
       ],
-      exports: [OtpService],
+      exports: [OTP_CONFIG_TOKEN, OtpService],
     };
   }
 
@@ -33,13 +34,19 @@ export class OtpModule {
       imports: options.imports,
       providers: [
         {
-          provide: OTP_CONFIG_TOKEN,
+          provide: `${OTP_CONFIG_TOKEN}_TEMP`,
           useFactory: options.useFactory,
           inject: options.inject,
         },
+        {
+          provide: OTP_CONFIG_TOKEN,
+          useFactory: (configTemp: IOtpModuleOptions) =>
+            OtpConfigResolver.resolveConfig(configTemp),
+          inject: [`${OTP_CONFIG_TOKEN}_TEMP`],
+        },
         OtpService,
       ],
-      exports: [OtpService],
+      exports: [OTP_CONFIG_TOKEN, OtpService],
     };
   }
 }

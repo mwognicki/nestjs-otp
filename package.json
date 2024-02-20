@@ -27,7 +27,7 @@
     "authentication module"
   ],
   "scripts": {
-    "build": "rimraf -rf dist && tsc -p tsconfig.json",
+    "build": "rimraf -rf dist && tsc -p tsconfig.build.json",
     "build:docs": "npx typedoc --out docs lib/index.ts --plugin typedoc-plugin-markdown",
     "dev": "tsc -w",
     "format": "prettier --write \"{lib}/**/*.ts\"",

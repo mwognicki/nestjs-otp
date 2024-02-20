@@ -2,10 +2,6 @@
 
 # Class: OtpService
 
-## Implements
-
-- `OnModuleInit`
-
 ## Table of contents
 
 ### Constructors
@@ -14,36 +10,28 @@
 
 ### Properties
 
-- [\_config](OtpService.md#_config)
-- [logger](OtpService.md#logger)
-
-### Accessors
-
 - [config](OtpService.md#config)
+- [logger](OtpService.md#logger)
 
 ### Methods
 
 - [getTOTP](OtpService.md#gettotp)
-- [onModuleInit](OtpService.md#onmoduleinit)
 - [pair](OtpService.md#pair)
 - [qrDataURL](OtpService.md#qrdataurl)
 - [qrString](OtpService.md#qrstring)
 - [secret](OtpService.md#secret)
-- [setDefaultOpts](OtpService.md#setdefaultopts)
-- [validateOpts](OtpService.md#validateopts)
-- [verify](OtpService.md#verify)
 
 ## Constructors
 
 ### constructor
 
-• **new OtpService**(`_config`): [`OtpService`](OtpService.md)
+• **new OtpService**(`config`): [`OtpService`](OtpService.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `_config` | [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md) |
+| `config` | `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\> |
 
 #### Returns
 
@@ -51,17 +39,17 @@
 
 #### Defined in
 
-[lib/otp.service.ts:26](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L26)
+[lib/services/otp.service.ts:11](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L11)
 
 ## Properties
 
-### \_config
+### config
 
-• `Private` **\_config**: [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)
+• `Private` **config**: `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
 
 #### Defined in
 
-[lib/otp.service.ts:26](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L26)
+[lib/services/otp.service.ts:12](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L12)
 
 ___
 
@@ -71,21 +59,7 @@ ___
 
 #### Defined in
 
-[lib/otp.service.ts:24](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L24)
-
-## Accessors
-
-### config
-
-• `get` **config**(): `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
-
-#### Returns
-
-`Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
-
-#### Defined in
-
-[lib/otp.service.ts:28](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L28)
+[lib/services/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L9)
 
 ## Methods
 
@@ -109,25 +83,7 @@ The generated TOTP object.
 
 #### Defined in
 
-[lib/otp.service.ts:77](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L77)
-
-___
-
-### onModuleInit
-
-▸ **onModuleInit**(): `void`
-
-#### Returns
-
-`void`
-
-#### Implementation of
-
-OnModuleInit.onModuleInit
-
-#### Defined in
-
-[lib/otp.service.ts:32](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L32)
+[lib/services/otp.service.ts:55](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L55)
 
 ___
 
@@ -151,7 +107,7 @@ Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/otp.service.ts:66](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L66)
+[lib/services/otp.service.ts:44](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L44)
 
 ___
 
@@ -175,7 +131,7 @@ A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:115](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L115)
+[lib/services/otp.service.ts:68](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L68)
 
 ___
 
@@ -199,7 +155,7 @@ A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/otp.service.ts:132](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L132)
+[lib/services/otp.service.ts:85](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L85)
 
 ___
 
@@ -223,62 +179,4 @@ The generated secret.
 
 #### Defined in
 
-[lib/otp.service.ts:43](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L43)
-
-___
-
-### setDefaultOpts
-
-▸ **setDefaultOpts**(): `void`
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[lib/otp.service.ts:192](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L192)
-
-___
-
-### validateOpts
-
-▸ **validateOpts**(): `void`
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[lib/otp.service.ts:143](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L143)
-
-___
-
-### verify
-
-▸ **verify**(`token`, `secret`, `shouldThrow?`): `Promise`\<`boolean`\>
-
-Verify an OTP token against a secret.
-
-#### Parameters
-
-| Name | Type | Default value | Description |
-| :------ | :------ | :------ | :------ |
-| `token` | `string` | `undefined` | The OTP token to verify. |
-| `secret` | `string` | `undefined` | The secret used to verify the token. |
-| `shouldThrow` | `boolean` | `true` | Whether to throw an exception if the token is invalid. |
-
-#### Returns
-
-`Promise`\<`boolean`\>
-
-Whether the token is valid.
-
-**`Throws`**
-
-If the token is invalid and `shouldThrow` is true.
-
-#### Defined in
-
-[lib/otp.service.ts:92](https://github.com/mwognicki/nestjs-otp/blob/e6a60e8/lib/otp.service.ts#L92)
+[lib/services/otp.service.ts:21](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L21)

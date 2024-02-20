@@ -1,17 +1,27 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Request } from 'express';
-import { OtpService } from '../otp.service';
+import { OtpService } from '../services';
 import { NoSecretException } from '../exceptions/no-secret.exception';
 import { OtpInvalidException } from '../exceptions/otp-invalid.exception';
 import { NoOtpException } from '../exceptions/no-otp.exception';
 import { IOtpModuleOptions, IOtpSecretResolver } from '../interfaces';
+import { OTP_CONFIG_TOKEN } from '../otp.constants';
 
 /**
  * A guard that verifies a one-time password (OTP) sent with a request.
  */
 @Injectable()
 export class OtpGuard implements CanActivate {
-  constructor(private readonly otpService: OtpService) {}
+  @Inject(OTP_CONFIG_TOKEN)
+  protected readonly config: Required<IOtpModuleOptions>;
+  @Inject(OtpService)
+  private readonly otpService: OtpService;
 
   private static resolveSecretResolver(
     options: Pick<IOtpModuleOptions, 'secretResolver'>,
@@ -45,25 +55,27 @@ export class OtpGuard implements CanActivate {
     const secret = await this.getSecret(request);
     this.validateSecret(secret);
 
-    return this.otpService.verify(otp, secret);
+    return this.verify(otp, secret);
   }
 
   /**
    * Gets the secret used for OTP verification.
    * @returns The secret.
+   * @protected
    */
-  async getSecret(request: Request): Promise<string | undefined> {
-    return OtpGuard.resolveSecretResolver(this.otpService.config)(request);
+  protected async getSecret(request: Request): Promise<string | undefined> {
+    return OtpGuard.resolveSecretResolver(this.config)(request);
   }
 
   /**
    * Gets the request from the execution context or request resolver if configured.
    * @param context The execution context.
    * @returns The request.
+   * @protected
    */
-  getRequest(context: ExecutionContext) {
-    if (this.otpService.config.requestResolver) {
-      return this.otpService.config.requestResolver(context);
+  protected getRequest(context: ExecutionContext) {
+    if (this.config.requestResolver) {
+      return this.config.requestResolver(context);
     }
     return context.switchToHttp().getRequest();
   }
@@ -72,12 +84,13 @@ export class OtpGuard implements CanActivate {
    * Gets the OTP from the request or OTP token resolver if configured.
    * @param request The request.
    * @returns The OTP.
+   * @protected
    */
-  async extractOtpToken(request: Request): Promise<string> {
-    if (this.otpService.config.otpResolver) {
-      return this.otpService.config.otpResolver(request);
+  protected async extractOtpToken(request: Request): Promise<string> {
+    if (this.config.otpResolver) {
+      return this.config.otpResolver(request);
     }
-    const otp = request.headers[this.otpService.config.header.toLowerCase()];
+    const otp = request.headers[this.config.header.toLowerCase()];
     if (!otp) {
       throw new NoOtpException();
     }
@@ -87,6 +100,32 @@ export class OtpGuard implements CanActivate {
     }
 
     return Promise.resolve(Array.isArray(otp) ? otp[0] : otp);
+  }
+
+  /**
+   * Verify an OTP token against a secret.
+   * @param token - The OTP token to verify.
+   * @param secret - The secret used to verify the token.
+   * @param shouldThrow - Whether to throw an exception if the token is invalid.
+   * @returns Whether the token is valid.
+   * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
+   * @protected
+   */
+  protected async verify(
+    token: string,
+    secret: string,
+    shouldThrow = true,
+  ): Promise<boolean> {
+    const otp = this.otpService.getTOTP({
+      secret,
+    });
+    const res = otp.validate({
+      token,
+    });
+    if (res === null && shouldThrow) {
+      throw new UnauthorizedException();
+    }
+    return res !== null;
   }
 
   private validateSecret(secret?: string): void {
@@ -100,7 +139,7 @@ export class OtpGuard implements CanActivate {
       throw new NoOtpException();
     }
 
-    if (otp.length !== this.otpService.config.digits) {
+    if (otp.length !== this.config.digits) {
       throw new OtpInvalidException();
     }
   }
