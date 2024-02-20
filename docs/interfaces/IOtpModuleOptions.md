@@ -19,6 +19,8 @@ Options for the OTP module.
 - [requestResolver](IOtpModuleOptions.md#requestresolver)
 - [secretMethod](IOtpModuleOptions.md#secretmethod)
 - [secretResolver](IOtpModuleOptions.md#secretresolver)
+- [silent](IOtpModuleOptions.md#silent)
+- [skipValidation](IOtpModuleOptions.md#skipvalidation)
 - [window](IOtpModuleOptions.md#window)
 
 ## Properties
@@ -31,7 +33,7 @@ The algorithm to use for generating the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:41](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L41)
+[lib/interfaces/otp.interface.ts:51](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L51)
 
 ___
 
@@ -43,7 +45,7 @@ The number of digits in the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:46](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L46)
+[lib/interfaces/otp.interface.ts:56](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L56)
 
 ___
 
@@ -55,7 +57,7 @@ The header to use for the OTP in the request.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:56](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L56)
+[lib/interfaces/otp.interface.ts:66](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L66)
 
 ___
 
@@ -67,7 +69,7 @@ The issuer of the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:26](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L26)
+[lib/interfaces/otp.interface.ts:36](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L36)
 
 ___
 
@@ -79,7 +81,7 @@ Whether to include the issuer in the OTP label.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:36](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L36)
+[lib/interfaces/otp.interface.ts:46](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L46)
 
 ___
 
@@ -91,7 +93,7 @@ The label of the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:31](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L31)
+[lib/interfaces/otp.interface.ts:41](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L41)
 
 ___
 
@@ -119,7 +121,7 @@ A function that returns the OTP from the request.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:66](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L66)
+[lib/interfaces/otp.interface.ts:76](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L76)
 
 ___
 
@@ -131,7 +133,7 @@ The period, in seconds, for which the OTP is valid.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:51](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L51)
+[lib/interfaces/otp.interface.ts:61](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L61)
 
 ___
 
@@ -159,7 +161,7 @@ A function that returns the request from the execution context.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:71](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L71)
+[lib/interfaces/otp.interface.ts:81](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L81)
 
 ___
 
@@ -171,7 +173,7 @@ Method used for transforming the secret into TOTP-compatible format. Default: 'f
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:81](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L81)
+[lib/interfaces/otp.interface.ts:91](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L91)
 
 ___
 
@@ -183,7 +185,31 @@ A function that returns the secret to use for generating the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:61](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L61)
+[lib/interfaces/otp.interface.ts:71](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L71)
+
+___
+
+### silent
+
+• `Optional` **silent**: `boolean`
+
+Flag to disable logger warnings on module config resolution.
+
+#### Defined in
+
+[lib/interfaces/otp.interface.ts:31](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L31)
+
+___
+
+### skipValidation
+
+• `Optional` **skipValidation**: `boolean`
+
+Flag to disable validation of module config options.
+
+#### Defined in
+
+[lib/interfaces/otp.interface.ts:26](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L26)
 
 ___
 
@@ -195,4 +221,4 @@ Window of counter values to test.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:76](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L76)
+[lib/interfaces/otp.interface.ts:86](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/interfaces/otp.interface.ts#L86)
