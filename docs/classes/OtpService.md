@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[lib/services/otp.service.ts:11](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L11)
+[lib/services/otp.service.ts:11](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L11)
 
 ## Properties
 
@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[lib/services/otp.service.ts:12](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L12)
+[lib/services/otp.service.ts:12](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L12)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[lib/services/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L9)
+[lib/services/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L9)
 
 ## Methods
 
@@ -83,7 +83,7 @@ The generated TOTP object.
 
 #### Defined in
 
-[lib/services/otp.service.ts:55](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L55)
+[lib/services/otp.service.ts:55](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L55)
 
 ___
 
@@ -107,7 +107,7 @@ Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/services/otp.service.ts:44](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L44)
+[lib/services/otp.service.ts:44](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L44)
 
 ___
 
@@ -131,7 +131,7 @@ A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/services/otp.service.ts:68](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L68)
+[lib/services/otp.service.ts:68](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L68)
 
 ___
 
@@ -155,7 +155,7 @@ A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/services/otp.service.ts:85](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L85)
+[lib/services/otp.service.ts:85](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L85)
 
 ___
 
@@ -179,4 +179,4 @@ The generated secret.
 
 #### Defined in
 
-[lib/services/otp.service.ts:21](https://github.com/mwognicki/nestjs-otp/blob/eb7d539/lib/services/otp.service.ts#L21)
+[lib/services/otp.service.ts:21](https://github.com/mwognicki/nestjs-otp/blob/f9a2fb7/lib/services/otp.service.ts#L21)
