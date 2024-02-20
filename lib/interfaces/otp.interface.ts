@@ -21,6 +21,16 @@ export type TOtpSecretResolver =
  */
 export interface IOtpModuleOptions {
   /**
+   * Flag to disable validation of module config options.
+   */
+  skipValidation?: boolean;
+
+  /**
+   * Flag to disable logger warnings on module config resolution.
+   */
+  silent?: boolean;
+
+  /**
    * The issuer of the OTP.
    */
   issuer: string;

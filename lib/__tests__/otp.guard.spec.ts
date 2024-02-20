@@ -303,6 +303,27 @@ describe('OtpModule', () => {
       expect(config.header).toEqual(OTP_DEFAULT_HEADER);
     });
 
+    it('should NOT set defaults on register async when skipValidation is truthy', async () => {
+      const otp = await setup(
+        {
+          digits: 1,
+          period: 1,
+          skipValidation: true,
+        },
+        undefined,
+        true,
+      );
+
+      const config = otp.get<IOtpModuleOptions>(OTP_CONFIG_TOKEN);
+
+      expect(config.digits).not.toEqual(OTP_MIN_SECURE_DIGITS);
+      expect(config.period).not.toEqual(OTP_MIN_SECURE_PERIOD);
+      expect(config.algorithm).not.toBeDefined();
+      expect(config.window).not.toBeDefined();
+      expect(config.secretMethod).not.toBeDefined();
+      expect(config.header).not.toBeDefined();
+    });
+
     it('should warn on init', async () => {
       const loggerMock = jest.spyOn(Logger.prototype, 'warn');
 
@@ -318,6 +339,26 @@ describe('OtpModule', () => {
         `Consider using a different period for OTP instead of 15`,
       );
       expect(loggerMock).toHaveBeenCalledWith(
+        `No secret resolver provided. Module might not work properly!`,
+      );
+    });
+
+    it('should not warn on init when in silent mode', async () => {
+      const loggerMock = jest.spyOn(Logger.prototype, 'warn');
+
+      await setup({
+        digits: 4,
+        period: 15,
+        silent: true,
+      });
+
+      expect(loggerMock).not.toHaveBeenCalledWith(
+        `Insecure number of digits provided for OTP (4)`,
+      );
+      expect(loggerMock).not.toHaveBeenCalledWith(
+        `Consider using a different period for OTP instead of 15`,
+      );
+      expect(loggerMock).not.toHaveBeenCalledWith(
         `No secret resolver provided. Module might not work properly!`,
       );
     });
