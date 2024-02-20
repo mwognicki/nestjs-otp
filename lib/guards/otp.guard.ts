@@ -18,11 +18,10 @@ import { OTP_CONFIG_TOKEN } from '../otp.constants';
  */
 @Injectable()
 export class OtpGuard implements CanActivate {
-  @Inject(OtpService)
-  private readonly otpService: OtpService;
-
   @Inject(OTP_CONFIG_TOKEN)
   protected readonly config: Required<IOtpModuleOptions>;
+  @Inject(OtpService)
+  private readonly otpService: OtpService;
 
   private static resolveSecretResolver(
     options: Pick<IOtpModuleOptions, 'secretResolver'>,
@@ -62,8 +61,9 @@ export class OtpGuard implements CanActivate {
   /**
    * Gets the secret used for OTP verification.
    * @returns The secret.
+   * @protected
    */
-  async getSecret(request: Request): Promise<string | undefined> {
+  protected async getSecret(request: Request): Promise<string | undefined> {
     return OtpGuard.resolveSecretResolver(this.config)(request);
   }
 
@@ -71,8 +71,9 @@ export class OtpGuard implements CanActivate {
    * Gets the request from the execution context or request resolver if configured.
    * @param context The execution context.
    * @returns The request.
+   * @protected
    */
-  getRequest(context: ExecutionContext) {
+  protected getRequest(context: ExecutionContext) {
     if (this.config.requestResolver) {
       return this.config.requestResolver(context);
     }
@@ -83,8 +84,9 @@ export class OtpGuard implements CanActivate {
    * Gets the OTP from the request or OTP token resolver if configured.
    * @param request The request.
    * @returns The OTP.
+   * @protected
    */
-  async extractOtpToken(request: Request): Promise<string> {
+  protected async extractOtpToken(request: Request): Promise<string> {
     if (this.config.otpResolver) {
       return this.config.otpResolver(request);
     }
