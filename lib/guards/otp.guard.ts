@@ -54,31 +54,6 @@ export class OtpGuard implements CanActivate {
   }
 
   /**
-   * Verify an OTP token against a secret.
-   * @param token - The OTP token to verify.
-   * @param secret - The secret used to verify the token.
-   * @param shouldThrow - Whether to throw an exception if the token is invalid.
-   * @returns Whether the token is valid.
-   * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
-   */
-  private async verify(
-    token: string,
-    secret: string,
-    shouldThrow = true,
-  ): Promise<boolean> {
-    const otp = this.otpService.getTOTP({
-      secret,
-    });
-    const res = otp.validate({
-      token,
-    });
-    if (res === null && shouldThrow) {
-      throw new UnauthorizedException();
-    }
-    return res !== null;
-  }
-
-  /**
    * Gets the secret used for OTP verification.
    * @returns The secret.
    */
@@ -117,6 +92,31 @@ export class OtpGuard implements CanActivate {
     }
 
     return Promise.resolve(Array.isArray(otp) ? otp[0] : otp);
+  }
+
+  /**
+   * Verify an OTP token against a secret.
+   * @param token - The OTP token to verify.
+   * @param secret - The secret used to verify the token.
+   * @param shouldThrow - Whether to throw an exception if the token is invalid.
+   * @returns Whether the token is valid.
+   * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
+   */
+  private async verify(
+    token: string,
+    secret: string,
+    shouldThrow = true,
+  ): Promise<boolean> {
+    const otp = this.otpService.getTOTP({
+      secret,
+    });
+    const res = otp.validate({
+      token,
+    });
+    if (res === null && shouldThrow) {
+      throw new UnauthorizedException();
+    }
+    return res !== null;
   }
 
   private validateSecret(secret?: string): void {

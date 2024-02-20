@@ -1,20 +1,5 @@
-import {
-  Inject,
-  Injectable,
-  Logger,
-  OnModuleInit,
-  UnauthorizedException,
-} from '@nestjs/common';
-import {
-  OTP_CONFIG_TOKEN,
-  OTP_DEFAULT_HEADER,
-  OTP_DEFAULT_SECRET_LENGTH,
-  OTP_MAX_SECURE_PERIOD,
-  OTP_MIN_DIGITS,
-  OTP_MIN_PERIOD,
-  OTP_MIN_SECURE_DIGITS,
-  OTP_MIN_SECURE_PERIOD,
-} from '../otp.constants';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { OTP_CONFIG_TOKEN, OTP_DEFAULT_SECRET_LENGTH } from '../otp.constants';
 import { IOtpModuleOptions, IOtpPairOpts } from '../interfaces';
 import * as OTPAuth from 'otpauth';
 import * as QRCode from 'qrcode';
