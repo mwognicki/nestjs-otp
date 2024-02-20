@@ -20,18 +20,13 @@ import * as OTPAuth from 'otpauth';
 import * as QRCode from 'qrcode';
 
 @Injectable()
-export class OtpService implements OnModuleInit {
+export class OtpService {
   private readonly logger = new Logger(OtpService.name);
 
   constructor(@Inject(OTP_CONFIG_TOKEN) private _config: IOtpModuleOptions) {}
 
   get config(): Required<IOtpModuleOptions> {
     return this._config as Required<IOtpModuleOptions>;
-  }
-
-  onModuleInit() {
-    this.validateOpts();
-    this.setDefaultOpts();
   }
 
   /**
@@ -113,67 +108,5 @@ export class OtpService implements OnModuleInit {
         resolve(url);
       });
     });
-  }
-
-  private validateOpts() {
-    if (!this.config.secretResolver) {
-      this.logger.warn(
-        'No secret resolver provided. Module will not work properly!',
-      );
-    }
-
-    if (!this.config.label) {
-      this.logger.warn('No label provided for OTP, defaulting to "OTP"');
-      this.config.label = 'OTP';
-    }
-
-    if (!this.config.issuer) {
-      this.logger.warn('No issuer provided for OTP, defaulting to "OTP"');
-      this.config.issuer = 'OTP';
-    }
-
-    if (
-      this.config.digits !== undefined &&
-      this.config.digits <= OTP_MIN_DIGITS
-    ) {
-      this.logger.warn(
-        `Invalid digits provided for OTP ${this.config.digits}, defaulting to ${OTP_MIN_SECURE_DIGITS}`,
-      );
-      this.config.digits = OTP_MIN_SECURE_DIGITS;
-    } else if (this.config.digits < OTP_MIN_SECURE_DIGITS) {
-      this.logger.warn(
-        `Insecure number of digits provided for OTP (${this.config.digits})`,
-      );
-    }
-
-    if (
-      this.config.period !== undefined &&
-      this.config.period <= OTP_MIN_PERIOD
-    ) {
-      this.logger.warn(
-        `Invalid period provided for OTP ${this.config.period}, defaulting to ${OTP_MIN_SECURE_PERIOD}`,
-      );
-      this.config.period = OTP_MIN_SECURE_PERIOD;
-    } else if (
-      this.config.period < OTP_MIN_SECURE_PERIOD ||
-      this.config.period > OTP_MAX_SECURE_PERIOD
-    ) {
-      this.logger.warn(
-        `Consider using a different period for OTP instead of ${this.config.period}`,
-      );
-    }
-  }
-
-  private setDefaultOpts() {
-    const defaults: Omit<IOtpModuleOptions, 'label' | 'issuer'> = {
-      issuerInLabel: false,
-      algorithm: 'SHA1',
-      digits: OTP_MIN_SECURE_DIGITS,
-      period: OTP_MIN_SECURE_PERIOD,
-      header: OTP_DEFAULT_HEADER,
-      window: 1,
-      secretMethod: 'fromUTF8',
-    };
-    this._config = { ...defaults, ...this.config };
   }
 }
