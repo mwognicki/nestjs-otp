@@ -31,7 +31,7 @@ Additional providers to register with the OTP module.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:114](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/interfaces/otp.interface.ts#L114)
+[lib/interfaces/otp.interface.ts:114](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L114)
 
 ___
 
@@ -60,7 +60,7 @@ Optional dependencies to inject into the OTP module.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:109](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/interfaces/otp.interface.ts#L109)
+[lib/interfaces/otp.interface.ts:109](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L109)
 
 ___
 
@@ -72,7 +72,7 @@ A class that implements the OTP module options.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:97](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/interfaces/otp.interface.ts#L97)
+[lib/interfaces/otp.interface.ts:97](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L97)
 
 ___
 
@@ -84,7 +84,7 @@ An existing instance of the OTP module options.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:92](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/interfaces/otp.interface.ts#L92)
+[lib/interfaces/otp.interface.ts:92](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L92)
 
 ___
 
@@ -112,4 +112,4 @@ A factory function that returns the OTP module options.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:102](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/interfaces/otp.interface.ts#L102)
+[lib/interfaces/otp.interface.ts:102](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/interfaces/otp.interface.ts#L102)

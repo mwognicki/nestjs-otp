@@ -10,12 +10,8 @@
 
 ### Properties
 
-- [\_config](OtpService.md#_config)
-- [logger](OtpService.md#logger)
-
-### Accessors
-
 - [config](OtpService.md#config)
+- [logger](OtpService.md#logger)
 
 ### Methods
 
@@ -29,13 +25,13 @@
 
 ### constructor
 
-• **new OtpService**(`_config`): [`OtpService`](OtpService.md)
+• **new OtpService**(`config`): [`OtpService`](OtpService.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `_config` | [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md) |
+| `config` | `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\> |
 
 #### Returns
 
@@ -43,17 +39,17 @@
 
 #### Defined in
 
-[lib/services/otp.service.ts:26](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L26)
+[lib/services/otp.service.ts:11](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L11)
 
 ## Properties
 
-### \_config
+### config
 
-• `Private` **\_config**: [`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)
+• `Private` **config**: `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
 
 #### Defined in
 
-[lib/services/otp.service.ts:26](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L26)
+[lib/services/otp.service.ts:12](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L12)
 
 ___
 
@@ -63,21 +59,7 @@ ___
 
 #### Defined in
 
-[lib/services/otp.service.ts:24](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L24)
-
-## Accessors
-
-### config
-
-• `get` **config**(): `Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
-
-#### Returns
-
-`Required`\<[`IOtpModuleOptions`](../interfaces/IOtpModuleOptions.md)\>
-
-#### Defined in
-
-[lib/services/otp.service.ts:28](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L28)
+[lib/services/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L9)
 
 ## Methods
 
@@ -101,7 +83,7 @@ The generated TOTP object.
 
 #### Defined in
 
-[lib/services/otp.service.ts:72](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L72)
+[lib/services/otp.service.ts:55](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L55)
 
 ___
 
@@ -125,7 +107,7 @@ Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/services/otp.service.ts:61](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L61)
+[lib/services/otp.service.ts:44](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L44)
 
 ___
 
@@ -149,7 +131,7 @@ A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/services/otp.service.ts:85](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L85)
+[lib/services/otp.service.ts:68](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L68)
 
 ___
 
@@ -173,7 +155,7 @@ A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/services/otp.service.ts:102](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L102)
+[lib/services/otp.service.ts:85](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L85)
 
 ___
 
@@ -197,4 +179,4 @@ The generated secret.
 
 #### Defined in
 
-[lib/services/otp.service.ts:38](https://github.com/mwognicki/nestjs-otp/blob/77280bc/lib/services/otp.service.ts#L38)
+[lib/services/otp.service.ts:21](https://github.com/mwognicki/nestjs-otp/blob/60cf302/lib/services/otp.service.ts#L21)
