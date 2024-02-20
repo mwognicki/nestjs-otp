@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { OtpService } from './otp.service';
+import { OtpService } from './services/otp.service';
 import { IOtpModuleAsyncOptions, IOtpModuleOptions } from './interfaces';
 import { OTP_CONFIG_TOKEN } from './otp.constants';
 

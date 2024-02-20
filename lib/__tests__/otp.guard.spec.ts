@@ -4,13 +4,14 @@ import { OtpModule } from '../otp.module';
 import { TestController } from './test-utils/test.controller';
 import request from 'supertest';
 import { Request } from 'express';
-import { OtpService } from '../otp.service';
+import { OtpService } from '../services';
 import {
   OTP_DEFAULT_HEADER,
   OTP_MIN_SECURE_DIGITS,
   OTP_MIN_SECURE_PERIOD,
 } from '../otp.constants';
 import { Logger } from '@nestjs/common';
+import * as OTPAuth from "otpauth";
 
 const setup = async (
   config: Partial<IOtpModuleOptions>,
@@ -51,9 +52,16 @@ describe('OtpModule', () => {
 
   describe('otp resolver', () => {
     it('should get OTP from header', async () => {
+      let otpValidateMock;
       const otpServiceMock = jest
-        .spyOn(OtpService.prototype, 'verify')
-        .mockImplementation(async () => true);
+        .spyOn(OtpService.prototype, 'getTOTP')
+        .mockImplementation( () => {
+          const totp = new OTPAuth.TOTP({
+            secret: OTPAuth.Secret.fromUTF8('any'),
+          });
+          otpValidateMock = jest.spyOn(totp, 'validate').mockReturnValue(1)
+          return totp;
+        });
 
       const secret = '654321', token = '123456';
 
@@ -66,15 +74,16 @@ describe('OtpModule', () => {
         .set('X-One-Time-Password', token)
         .expect(200);
 
-      expect(otpServiceMock).toHaveBeenNthCalledWith(1, token, secret);
+      expect(otpValidateMock).toHaveBeenNthCalledWith(1, {token});
+      expect(otpServiceMock).toHaveBeenNthCalledWith(1, {secret});
 
       otpServiceMock.mockRestore();
     });
 
     it('should get OTP from header when header name is custom (failed)', async () => {
       const otpServiceMock = jest
-        .spyOn(OtpService.prototype, 'verify')
-        .mockImplementation(async () => true);
+        .spyOn(OtpService.prototype, 'getTOTP')
+        .mockImplementation();
 
       const secret = '654321', token = '123456';
 
@@ -93,9 +102,16 @@ describe('OtpModule', () => {
     });
 
     it('should get OTP from header when header name is custom (success)', async () => {
+      let otpValidateMock;
       const otpServiceMock = jest
-        .spyOn(OtpService.prototype, 'verify')
-        .mockImplementation(async () => true);
+          .spyOn(OtpService.prototype, 'getTOTP')
+          .mockImplementation( () => {
+            const totp = new OTPAuth.TOTP({
+              secret: OTPAuth.Secret.fromUTF8('any'),
+            });
+            otpValidateMock = jest.spyOn(totp, 'validate').mockReturnValue(1)
+            return totp;
+          });
 
       const secret = '654321', token = '123456';
 
@@ -109,7 +125,8 @@ describe('OtpModule', () => {
         .set('X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog', token)
         .expect(200);
 
-      expect(otpServiceMock).toHaveBeenNthCalledWith(1, token, secret);
+      expect(otpServiceMock).toHaveBeenNthCalledWith(1, {secret});
+      expect(otpValidateMock).toHaveBeenNthCalledWith(1, {token});
 
       otpServiceMock.mockRestore();
     });
@@ -159,8 +176,14 @@ describe('OtpModule', () => {
   describe('validation', () => {
     it('should throw invalid OTP exception (length mismatch)', async () => {
       const otpServiceMock = jest
-        .spyOn(OtpService.prototype, 'verify')
-        .mockImplementation(async () => false);
+          .spyOn(OtpService.prototype, 'getTOTP')
+          .mockImplementation( () => {
+            const totp = new OTPAuth.TOTP({
+              secret: OTPAuth.Secret.fromUTF8('any'),
+            });
+            jest.spyOn(totp, 'validate').mockReturnValue(null)
+            return totp;
+          });
 
       const secret = '654321', token = '123456';
 
@@ -183,8 +206,14 @@ describe('OtpModule', () => {
 
     it('should throw no OTP exception', async () => {
       const otpServiceMock = jest
-        .spyOn(OtpService.prototype, 'verify')
-        .mockImplementation(async () => false);
+          .spyOn(OtpService.prototype, 'getTOTP')
+          .mockImplementation( () => {
+            const totp = new OTPAuth.TOTP({
+              secret: OTPAuth.Secret.fromUTF8('any'),
+            });
+            jest.spyOn(totp, 'validate').mockReturnValue(null)
+            return totp;
+          });
 
       const secret = '654321'
 
@@ -205,8 +234,14 @@ describe('OtpModule', () => {
 
     it('should throw no secret exception', async () => {
       const otpServiceMock = jest
-        .spyOn(OtpService.prototype, 'verify')
-        .mockImplementation(async () => false);
+          .spyOn(OtpService.prototype, 'getTOTP')
+          .mockImplementation( () => {
+            const totp = new OTPAuth.TOTP({
+              secret: OTPAuth.Secret.fromUTF8('any'),
+            });
+            jest.spyOn(totp, 'validate').mockReturnValue(null)
+            return totp;
+          });
 
       const otp = await setup({
         otpResolver: () => '123456',

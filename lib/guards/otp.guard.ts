@@ -1,6 +1,11 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Request } from 'express';
-import { OtpService } from '../otp.service';
+import { OtpService } from '../services';
 import { NoSecretException } from '../exceptions/no-secret.exception';
 import { OtpInvalidException } from '../exceptions/otp-invalid.exception';
 import { NoOtpException } from '../exceptions/no-otp.exception';
@@ -45,7 +50,32 @@ export class OtpGuard implements CanActivate {
     const secret = await this.getSecret(request);
     this.validateSecret(secret);
 
-    return this.otpService.verify(otp, secret);
+    return this.verify(otp, secret);
+  }
+
+  /**
+   * Verify an OTP token against a secret.
+   * @param token - The OTP token to verify.
+   * @param secret - The secret used to verify the token.
+   * @param shouldThrow - Whether to throw an exception if the token is invalid.
+   * @returns Whether the token is valid.
+   * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
+   */
+  private async verify(
+    token: string,
+    secret: string,
+    shouldThrow = true,
+  ): Promise<boolean> {
+    const otp = this.otpService.getTOTP({
+      secret,
+    });
+    const res = otp.validate({
+      token,
+    });
+    if (res === null && shouldThrow) {
+      throw new UnauthorizedException();
+    }
+    return res !== null;
   }
 
   /**

@@ -14,8 +14,8 @@ import {
   OTP_MIN_PERIOD,
   OTP_MIN_SECURE_DIGITS,
   OTP_MIN_SECURE_PERIOD,
-} from './otp.constants';
-import { IOtpModuleOptions, IOtpPairOpts } from './interfaces';
+} from '../otp.constants';
+import { IOtpModuleOptions, IOtpPairOpts } from '../interfaces';
 import * as OTPAuth from 'otpauth';
 import * as QRCode from 'qrcode';
 
@@ -79,31 +79,6 @@ export class OtpService implements OnModuleInit {
       ...this.config,
       secret: OTPAuth.Secret[this.config.secretMethod](opts.secret),
     });
-  }
-
-  /**
-   * Verify an OTP token against a secret.
-   * @param token - The OTP token to verify.
-   * @param secret - The secret used to verify the token.
-   * @param shouldThrow - Whether to throw an exception if the token is invalid.
-   * @returns Whether the token is valid.
-   * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
-   */
-  async verify(
-    token: string,
-    secret: string,
-    shouldThrow = true,
-  ): Promise<boolean> {
-    const otp = this.getTOTP({
-      secret,
-    });
-    const res = otp.validate({
-      token,
-    });
-    if (res === null && shouldThrow) {
-      throw new UnauthorizedException();
-    }
-    return res !== null;
   }
 
   /**
