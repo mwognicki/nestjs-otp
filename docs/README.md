@@ -222,6 +222,15 @@ In the example above:
 - It uses the `UserService` to fetch the OTP secret associated with the current user.
 - The `UserService` is expected to provide an asynchronous method (`getOtpSecret`) that retrieves the OTP secret based on the user's context.
 
+#### `label` as Function
+
+You can also configure `label` as a function to resolve OTP label dynamically, eg from `Request`.
+This can be used to assign different labels to different users, so in the authenticator application,
+your project will be presented as _Your Project: john@doe.com_, where _Your Project_ is the value
+of `issuer`, and _john@doe.com_ - dynamically resolved `label` from current user
+
+#### Sample OTP Configuration File
+
 An `otp.config.ts` file might look like following:
 
 ```typescript
