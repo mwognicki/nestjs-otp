@@ -16,6 +16,10 @@ export type TOtpSecretResolver =
   | IOtpSecretResolver
   | ((request?: Request) => string | Promise<string>);
 
+export type TLabelResolverFn = (request?: Request) => string | Promise<string>;
+
+export type TOtpLabel = string | TLabelResolverFn;
+
 /**
  * Options for the OTP module.
  */
@@ -36,9 +40,9 @@ export interface IOtpModuleOptions {
   issuer: string;
 
   /**
-   * The label of the OTP.
+   * The label of the OTP or label resolver.
    */
-  label: string;
+  label: TOtpLabel;
 
   /**
    * Whether to include the issuer in the OTP label.
