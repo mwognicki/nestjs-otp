@@ -20,4 +20,4 @@ The secret to use for generating the OTP.
 
 #### Defined in
 
-[lib/interfaces/otp.interface.ts:134](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/interfaces/otp.interface.ts#L134)
+[lib/interfaces/otp.interface.ts:138](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/interfaces/otp.interface.ts#L138)

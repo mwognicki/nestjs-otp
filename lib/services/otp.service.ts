@@ -3,6 +3,7 @@ import { OTP_CONFIG_TOKEN, OTP_DEFAULT_SECRET_LENGTH } from '../otp.constants';
 import { IOtpModuleOptions, IOtpPairOpts } from '../interfaces';
 import * as OTPAuth from 'otpauth';
 import * as QRCode from 'qrcode';
+import { Request } from 'express';
 
 @Injectable()
 export class OtpService {
@@ -36,13 +37,29 @@ export class OtpService {
     return secret[representations[this.config.secretMethod]];
   }
 
+  async resolveLabel(request: Request): Promise<string> {
+    if (typeof this.config.label === 'string') {
+      return this.config.label;
+    }
+
+    return this.config.label(request);
+  }
+
   /**
    * Return a link for pairing with authenticator application.
    * @param opts - Options for generating the subscription.
+   * @param request
    * @returns {string} Link for pairing with authenticator application.
    */
-  async pair(opts: IOtpPairOpts): Promise<string> {
-    const otp = this.getTOTP(opts);
+  async pair(opts: IOtpPairOpts, request?: Request): Promise<string> {
+    let label = this.config.label;
+    if (typeof label !== 'string') {
+      label = await this.resolveLabel(request);
+    }
+    const otp = this.getTOTP({
+      ...opts,
+      label: label as string,
+    });
     return otp.toString();
   }
 
@@ -52,9 +69,10 @@ export class OtpService {
    * @param opts - Options for generating the TOTP object.
    * @returns The generated TOTP object.
    */
-  getTOTP(opts: IOtpPairOpts): OTPAuth.TOTP {
+  getTOTP(opts: Omit<IOtpPairOpts, 'label'> & { label: string }): OTPAuth.TOTP {
     return new OTPAuth.TOTP({
       ...this.config,
+      ...opts,
       secret: OTPAuth.Secret[this.config.secretMethod](opts.secret),
     });
   }

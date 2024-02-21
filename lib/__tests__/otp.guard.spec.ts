@@ -69,10 +69,12 @@ describe('OtpModule', () => {
         });
 
       const secret = '654321',
-        token = '123456';
+        token = '123456',
+        label = 'some label';
 
       const otp = await setup({
         secretResolver: () => secret,
+        label,
       });
 
       await request(otp.getHttpServer())
@@ -81,7 +83,7 @@ describe('OtpModule', () => {
         .expect(200);
 
       expect(otpValidateMock).toHaveBeenNthCalledWith(1, { token });
-      expect(otpServiceMock).toHaveBeenNthCalledWith(1, { secret });
+      expect(otpServiceMock).toHaveBeenNthCalledWith(1, { label, secret });
 
       otpServiceMock.mockRestore();
     });
@@ -121,11 +123,13 @@ describe('OtpModule', () => {
         });
 
       const secret = '654321',
-        token = '123456';
+        token = '123456',
+        label = 'some label';
 
       const otp = await setup({
         secretResolver: () => secret,
         header: 'X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog',
+        label,
       });
 
       await request(otp.getHttpServer())
@@ -133,10 +137,49 @@ describe('OtpModule', () => {
         .set('X-Quick-Brown-Fox-Jumps-Over-Lazy-Dog', token)
         .expect(200);
 
-      expect(otpServiceMock).toHaveBeenNthCalledWith(1, { secret });
+      expect(otpServiceMock).toHaveBeenNthCalledWith(1, { label, secret });
       expect(otpValidateMock).toHaveBeenNthCalledWith(1, { token });
 
       otpServiceMock.mockRestore();
+    });
+  });
+
+  describe('label resolver', () => {
+    it('should resolve label from function', async () => {
+      const label = 'some label from function';
+      const labelResolver = jest.fn().mockReturnValue(label);
+      const secret = 'somesecret';
+
+      const otpServiceMock = jest
+        .spyOn(OtpService.prototype, 'getTOTP')
+        .mockImplementation(() => {
+          const totp = new OTPAuth.TOTP({
+            secret: OTPAuth.Secret.fromUTF8('any'),
+          });
+          jest.spyOn(totp, 'validate').mockReturnValue(1);
+          return totp;
+        });
+
+      const otp = await setup({
+        label: labelResolver,
+        secretResolver: () => secret,
+      });
+
+      await otp.get(OtpService).pair({
+        secret,
+      });
+
+      await request(otp.getHttpServer())
+        .get('/test')
+        .set({
+          [OTP_DEFAULT_HEADER]: '123456',
+        })
+        .expect(200);
+
+      expect(labelResolver).toHaveBeenCalledTimes(2);
+
+      otpServiceMock.mockRestore();
+      labelResolver.mockRestore();
     });
   });
 

@@ -55,7 +55,7 @@ export class OtpGuard implements CanActivate {
     const secret = await this.getSecret(request);
     this.validateSecret(secret);
 
-    return this.verify(otp, secret);
+    return this.verify(otp, secret, request);
   }
 
   /**
@@ -106,6 +106,7 @@ export class OtpGuard implements CanActivate {
    * Verify an OTP token against a secret.
    * @param token - The OTP token to verify.
    * @param secret - The secret used to verify the token.
+   * @param request
    * @param shouldThrow - Whether to throw an exception if the token is invalid.
    * @returns Whether the token is valid.
    * @throws {UnauthorizedException} If the token is invalid and `shouldThrow` is true.
@@ -114,10 +115,13 @@ export class OtpGuard implements CanActivate {
   protected async verify(
     token: string,
     secret: string,
+    request: Request,
     shouldThrow = true,
   ): Promise<boolean> {
+    const label = await this.otpService.resolveLabel(request);
     const otp = this.otpService.getTOTP({
       secret,
+      label,
     });
     const res = otp.validate({
       token,

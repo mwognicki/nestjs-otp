@@ -19,6 +19,7 @@
 - [pair](OtpService.md#pair)
 - [qrDataURL](OtpService.md#qrdataurl)
 - [qrString](OtpService.md#qrstring)
+- [resolveLabel](OtpService.md#resolvelabel)
 - [secret](OtpService.md#secret)
 
 ## Constructors
@@ -39,7 +40,7 @@
 
 #### Defined in
 
-[lib/services/otp.service.ts:11](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L11)
+[lib/services/otp.service.ts:12](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L12)
 
 ## Properties
 
@@ -49,7 +50,7 @@
 
 #### Defined in
 
-[lib/services/otp.service.ts:12](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L12)
+[lib/services/otp.service.ts:13](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L13)
 
 ___
 
@@ -59,7 +60,7 @@ ___
 
 #### Defined in
 
-[lib/services/otp.service.ts:9](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L9)
+[lib/services/otp.service.ts:10](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L10)
 
 ## Methods
 
@@ -73,7 +74,7 @@ Generate a TOTP object with the given options.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `opts` | [`IOtpPairOpts`](../interfaces/IOtpPairOpts.md) | Options for generating the TOTP object. |
+| `opts` | `Omit`\<[`IOtpPairOpts`](../interfaces/IOtpPairOpts.md), ``"label"``\> & \{ `label`: `string`  } | Options for generating the TOTP object. |
 
 #### Returns
 
@@ -83,13 +84,13 @@ The generated TOTP object.
 
 #### Defined in
 
-[lib/services/otp.service.ts:55](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L55)
+[lib/services/otp.service.ts:72](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L72)
 
 ___
 
 ### pair
 
-▸ **pair**(`opts`): `Promise`\<`string`\>
+▸ **pair**(`opts`, `request?`): `Promise`\<`string`\>
 
 Return a link for pairing with authenticator application.
 
@@ -98,6 +99,7 @@ Return a link for pairing with authenticator application.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `opts` | [`IOtpPairOpts`](../interfaces/IOtpPairOpts.md) | Options for generating the subscription. |
+| `request?` | `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\> |  |
 
 #### Returns
 
@@ -107,7 +109,7 @@ Link for pairing with authenticator application.
 
 #### Defined in
 
-[lib/services/otp.service.ts:44](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L44)
+[lib/services/otp.service.ts:54](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L54)
 
 ___
 
@@ -131,7 +133,7 @@ A promise that resolves to the data URL of the QR code.
 
 #### Defined in
 
-[lib/services/otp.service.ts:68](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L68)
+[lib/services/otp.service.ts:86](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L86)
 
 ___
 
@@ -155,7 +157,27 @@ A promise that resolves to the string representation of the QR code.
 
 #### Defined in
 
-[lib/services/otp.service.ts:85](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L85)
+[lib/services/otp.service.ts:103](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L103)
+
+___
+
+### resolveLabel
+
+▸ **resolveLabel**(`request`): `Promise`\<`string`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `request` | `Request`\<`ParamsDictionary`, `any`, `any`, `ParsedQs`, `Record`\<`string`, `any`\>\> |
+
+#### Returns
+
+`Promise`\<`string`\>
+
+#### Defined in
+
+[lib/services/otp.service.ts:40](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L40)
 
 ___
 
@@ -179,4 +201,4 @@ The generated secret.
 
 #### Defined in
 
-[lib/services/otp.service.ts:21](https://github.com/mwognicki/nestjs-otp/blob/158743c/lib/services/otp.service.ts#L21)
+[lib/services/otp.service.ts:22](https://github.com/mwognicki/nestjs-otp/blob/019ed90/lib/services/otp.service.ts#L22)
